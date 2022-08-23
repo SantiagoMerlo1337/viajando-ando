@@ -1,1 +1,0 @@
-web: gunicorn viajandoando.wsgi --log-file -

@@ -1,1 +1,1 @@
-web: gunicorn viajandoando.wsgi
+web: cd viajandoando && gunicorn viajandoando.wsgi --log-file -

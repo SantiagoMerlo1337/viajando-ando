@@ -1,10 +1,9 @@
-from django.shortcuts import render
-
 from django.shortcuts import render, HttpResponseRedirect
 from .forms import NewUserForm
 from django.shortcuts import  render, redirect
 from django.contrib.auth import login
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 def register_request(request):
 	if request.method == "POST":
@@ -12,14 +11,15 @@ def register_request(request):
 		if form.is_valid():
 			user = form.save()
 			login(request, user)
-			messages.success(request, "Registration successful." )
+			messages.success(request, "Registración realizada." )
 			return redirect("/")
-		messages.error(request, "Unsuccessful registration. Invalid information.")
+		messages.error(request, "No se pudo registrar. Información no válida.")
 	form = NewUserForm()
 	return render (request=request, template_name="register.html", context={"register_form":form})
 
-def viajes(request):
-    return render(request, 'viajes.html', {},)
+@login_required
+def viajes(request):	
+	return render(request, 'viajes.html', {},)
 
 def home(request):
     return render(request, 'base.html', {})

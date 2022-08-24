@@ -127,4 +127,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home" 
 
+LANGUAGE_CODE = "es-ES"
+
+STATIC_URL = 'static/'
+
 django_heroku.settings(locals())

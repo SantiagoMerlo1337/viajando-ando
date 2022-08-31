@@ -28,16 +28,18 @@
                       <a class="nav-link px-3 fw-bold" href="{% url 'Viajes' %}">Mis Viajes</a>
                     </li>
                 </ul>
+              
+                <div class="d-flex align-items-center justify-content-between gap-4">
                   {% if user.is_authenticated %}
                     Hola {{ user.username }}!
                     <a href="{% url 'logout' %}">Cerrar sesion</a>
                   {% else %}
-                    <div class="d-flex justify-content-between">
-                      <a class="text-decoration-none " href="{% url 'register' %}">Registrarse</a>    
+                      <a class="text-decoration-none" href="{% url 'register' %}">Registrarse</a>    
                       <a class="btn btn-primary" href="{% url 'login' %}">Iniciar Sesion</a>
-                    </div>
+                    
                   {% endif %}
-              </div>
+                </div>
+              </div>  
           </div>
       </div>
     </nav>     

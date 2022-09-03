@@ -24,16 +24,10 @@ def mis_viajes(request):
 def home(request):
     return render(request, 'base.html', {})
 
-# def viajes(request):
-	
-# 	return 	render(request, 'viajes.html', {})
-
 def viajes(request):
     if request.method == "GET":
         form = FormularioViajes(request.GET)
-
         if form.is_valid():
-            print("los datos finales son:", form.cleaned_data)
             return HttpResponseRedirect("/viajes/")
     else:
         form = FormularioViajes()

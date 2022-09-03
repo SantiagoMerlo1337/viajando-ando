@@ -25,4 +25,4 @@ class NewUserForm(UserCreationForm):
 class FormularioViajes(forms.ModelForm):
     class Meta:
         model = Viaje
-        fields = ['ciudad_id_origen','ciudad_id_destino','descripcion','capacidad',]
+        fields = ['ciudad_origen','ciudad_destino',]

@@ -4,7 +4,16 @@
 
 {% block content %}
 
-<p>VIAJES</p>
+
+<div class="container">
+    <p>VIAJES</p>
+    <form action="." method="get">
+        {% csrf_token %}
+        {{ form.as_p }}
+    
+        <input type="submit" value="Buscar" />
+    </form>
+</div>
 
 
 {% endblock %}

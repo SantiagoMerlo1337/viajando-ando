@@ -27,4 +27,5 @@ urlpatterns = [
     path('mis_viajes/', views.mis_viajes, name="Mis Viajes"),
     path("register", views.register_request, name="register"),
     path("viajes/", views.viajes, name="Viajes"),
+    path("creacion_viaje/", views.creacion_viaje, name="Creacion viaje"),
 ]

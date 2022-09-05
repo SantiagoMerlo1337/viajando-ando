@@ -26,3 +26,8 @@ class FormularioViajes(forms.ModelForm):
     class Meta:
         model = Viaje
         fields = ['ciudad_origen','ciudad_destino',]
+
+class FormularioCreacionViaje(forms.ModelForm):
+    class Meta:
+        model = Viaje
+        fields = ['ciudad_origen','ciudad_destino', 'descripcion', 'capacidad',]

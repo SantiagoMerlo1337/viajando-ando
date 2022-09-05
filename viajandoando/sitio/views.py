@@ -1,5 +1,8 @@
+from subprocess import CREATE_NEW_CONSOLE
 from django.shortcuts import render, HttpResponseRedirect
-from .forms import FormularioViajes, NewUserForm
+
+from sitio.models import Ciudad, Viaje
+from .forms import FormularioCreacionViaje, FormularioViajes, NewUserForm
 from django.shortcuts import  render, redirect
 from django.contrib.auth import login
 from django.contrib import messages
@@ -27,9 +30,31 @@ def home(request):
 def viajes(request):
     if request.method == "GET":
         form = FormularioViajes(request.GET)
-        if form.is_valid():
+        if form.is_valid() and form.Meta.fields[0] != form.Meta.fields[1] :
             return HttpResponseRedirect("/viajes/")
     else:
         form = FormularioViajes()
-
     return render(request, "viajes.html", {"form": form})
+
+@login_required
+def creacion_viaje(request):
+	if request.method == "GET":
+		form = FormularioCreacionViaje(request.GET)
+		if form.is_valid() and form.Meta.fields[0] != form.Meta.fields[1] :
+
+			return HttpResponseRedirect("/viajes/")
+		else:
+			form = FormularioCreacionViaje()
+	return render(request, "creacion_viaje.html", {"form": form})
+
+#return render(request, "crear_viaje.html", {"form": form})
+
+def crear_viaje(request):
+	if request.method == "POST":
+		form = FormularioCreacionViaje(request.GET)
+		if form.is_valid() and form.Meta.fields[0] != form.Meta.fields[1] :
+
+			return HttpResponseRedirect("/viajes/")
+		else:
+			form = FormularioCreacionViaje()
+	return render(request, "creacion_viaje.html", {"form": form})

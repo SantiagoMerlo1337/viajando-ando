@@ -3,33 +3,55 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
+<div class="container py-5">
+  <form action="." method="get">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Buscar" />
+</form>
+<a href="{% url 'Creacion viaje' %}"><button class="btn bg-primary text-white mt-3">Crear viaje</button></a>
 
-<div class="container py-5 ">
-    <form action="." method="get">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Buscar" />
-    </form>
-    <a href="{% url 'Creacion viaje' %}"><button class="btn bg-primary text-white mt-3">Crear viaje</button></a>
-    
+<div class="viajes mt-3 ">
 
-    <div class="viajes">
-    {% if lista_viajes is None %}
-        <p>No se encontraron resultados.</p>
-    {% else %}
-        {% for viaje in lista_viajes %}
-            <div class="card mt-3" style="width: 28rem;">
-                <div class="card-body">
-                    <h6 class="text-end">{{viaje.fecha}}</h6>
-                    <h5 class="card-title">{{viaje.conductor}}</h5>
-                    <p class="card-text">{{viaje.descripcion}}</p>
-                    <a href="#" class="btn btn-primary">Ver más</a>
-                </div>
-            </div>
-        {% endfor %}
+{% if lista_viajes|length == 0 %}
+    <p>No se encontraron resultados.</p>
+{% else %}    
+    {% for viaje in lista_viajes %}
+      <div class="card" style="width: 28rem;">
+        <div class="card-body">
+            <h6 class="text-end">{{viaje.datetime}}</h6>
+            <h5 class="card-title">{{viaje.conductor}}</h5>
+            <p class="card-text">{{viaje.descripcion}}</p>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{forloop.counter}}">Ver más</button>
+        </div>
     </div>
-    {% endif %}
 
+        <div class="modal fade" id="exampleModal{{forloop.counter}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title fs-4" id="exampleModalLabel">{{viaje.conductor}}</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        <li>Descripcion: {{viaje.descripcion}}</li>
+                        <br>
+                        <li>Fecha: {{viaje.datetime}}</li>
+                        <br>
+                        <li>Imagen: <img src="{{viaje.imagen}}" alt="Auto" width="250" height="250"></li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                  <button type="button" class="btn btn-primary">Contactar</button>
+                  <button type="button" class="btn btn-success">Solicitar Unirme</button>
+                </div>
+              </div>
+            </div>
+          </div>
+    {% endfor %}
+{% endif %}
 </div>
 
 {% endblock %}

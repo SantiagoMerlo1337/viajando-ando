@@ -8,8 +8,7 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from sitio.models import *
-from django.contrib.admin.widgets import AdminDateWidget, AdminSplitDateTime, AdminTimeWidget
-
+from django.contrib.admin.widgets import AdminDateWidget, AdminTimeWidget, AdminSplitDateTime
 
 # Create your forms here.
 
@@ -27,8 +26,11 @@ class NewUserForm(UserCreationForm):
 			user.save()
 		return user
 
+#WIDGET
 class DateTimePickerInput(forms.DateTimeInput):
     input_type = 'datetime'
+class TimePickerInput(forms.TimeInput):
+    input_type = 'time'
 
 
 class FormularioViajes(forms.ModelForm):
@@ -39,7 +41,11 @@ class FormularioViajes(forms.ModelForm):
 		fields = ['ciudad_origen','ciudad_destino',]
 
 class FormularioCreacionViaje(forms.ModelForm):
-    class Meta:
-        model = Viaje
-        fields = ['ciudad_origen','ciudad_destino', 'descripcion', 'capacidad', 'fecha',]
+	class Meta:
+		model = Viaje
+		fields = ['ciudad_origen','ciudad_destino', 'descripcion', 'capacidad', 'fecha', 'hora', 'imagen']
+		widgets = {
+			'fecha': DateTimePickerInput(attrs={'type': 'date'}),
+			'hora': TimePickerInput()
+		}
 		

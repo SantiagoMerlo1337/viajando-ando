@@ -1,3 +1,4 @@
+from datetime import datetime
 from msilib.schema import Class
 from operator import truediv
 from platform import release
@@ -6,7 +7,7 @@ from sys import maxsize
 from tkinter import CASCADE
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils import timezone
+from django.contrib.admin.widgets import AdminDateWidget, AdminTimeWidget, AdminSplitDateTime
 
 # Create your models here.
 
@@ -28,9 +29,12 @@ class Conductor(models.Model):
 
 class Viaje(models.Model):
     conductor = models.ForeignKey(User,on_delete=models.CASCADE, related_name='conductor_set')
-    fecha = models.DateTimeField()
+    datetime = models.DateTimeField(blank=True, null=True, default=None)
 
-    imagen = models.ImageField(blank=True, null=True, default=None)
+    fecha = models.DateField(blank=True, null=True, default=None)
+    hora = models.TimeField(blank=True, null=True, default=None)
+
+    imagen = models.ImageField(upload_to="images/", blank=True, null=True, default=None)
 
     ciudad_origen = models.ForeignKey(Ciudad,on_delete=models.CASCADE, related_name='ciudad_origen_set')
     ciudad_destino = models.ForeignKey(Ciudad,on_delete=models.CASCADE, related_name='ciudad_destino_set')
@@ -42,11 +46,11 @@ class Viaje(models.Model):
     capacidad = models.PositiveIntegerField()
 
     def get_model_fields(model):
-        return model._meta.fields
+        return model._meta.fields   
 
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=['conductor', 'fecha'], name='unique_conductor_fecha_combination'
+                fields=['conductor', 'datetime'], name='unique_conductor_datetime_combination'
             )
         ]

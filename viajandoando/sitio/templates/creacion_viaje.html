@@ -3,8 +3,8 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<div class="container">
-    <form action="." method="get">
+<div class="container py-5">
+    <form action="." method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Crear" />

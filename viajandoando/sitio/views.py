@@ -10,6 +10,7 @@ from django.shortcuts import  render, redirect
 from django.contrib.auth import login
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from datetime import date
 
 def register_request(request):
 	if request.method == "POST":
@@ -35,14 +36,13 @@ def home(request):
 def viajes(request):
 	if request.method == "GET":
 		form = FormularioViajes(request.GET)
-		viajes=None
-		if form.is_valid() :
+		viajes = ''
+		if form.is_valid() and form.cleaned_data['fecha_inicio'] < form.cleaned_data['fecha_fin'] and form.cleaned_data['ciudad_origen'] != form.cleaned_data['ciudad_destino']:
 			date1 = form.cleaned_data['fecha_inicio']
 			date2 = form.cleaned_data['fecha_fin']
 			origen = form.cleaned_data['ciudad_origen']
 			destino = form.cleaned_data['ciudad_destino']
-			viajes = Viaje.objects.filter(fecha__range=[date1, date2], ciudad_origen=origen, ciudad_destino=destino)
-			print(viajes)
+			viajes = Viaje.objects.filter(datetime__range=[date1, date2], ciudad_origen=origen, ciudad_destino=destino)
 		else:
 			form = FormularioViajes()
 	return render(request, "viajes.html", {"form": form, 'lista_viajes': viajes})
@@ -51,8 +51,10 @@ def viajes(request):
 @login_required
 def creacion_viaje(request):
 	form = FormularioCreacionViaje(request.POST)
-	if form.is_valid():
-
+	if form.is_valid() and form.cleaned_data['fecha'] > date.today():
+		viaje = form.save(commit=False)
+		viaje.datetime = datetime.combine(viaje.fecha, viaje.hora)
+		viaje.conductor = request.user
 		form.save()
 		return HttpResponseRedirect("/viajes/")
 	else:

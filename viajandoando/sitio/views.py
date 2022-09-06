@@ -1,4 +1,7 @@
+from datetime import datetime
 from subprocess import CREATE_NEW_CONSOLE
+from time import process_time_ns
+from xml.etree.ElementInclude import include
 from django.shortcuts import render, HttpResponseRedirect
 
 from sitio.models import Viaje, Ciudad, Provincia, User
@@ -27,34 +30,33 @@ def mis_viajes(request):
 def home(request):
     return render(request, 'base.html', {})
 
+
+#VER VIAJES
 def viajes(request):
 	if request.method == "GET":
 		form = FormularioViajes(request.GET)
-		if form.is_valid():
-			return HttpResponseRedirect("/viajes/")
+		viajes=None
+		if form.is_valid() :
+			date1 = form.cleaned_data['fecha_inicio']
+			date2 = form.cleaned_data['fecha_fin']
+			origen = form.cleaned_data['ciudad_origen']
+			destino = form.cleaned_data['ciudad_destino']
+			viajes = Viaje.objects.filter(fecha__range=[date1, date2], ciudad_origen=origen, ciudad_destino=destino)
+			print(viajes)
 		else:
 			form = FormularioViajes()
-		viajes = Viaje.objects.all()
-	return render(request, "viajes.html", {"form": form, 'lista_viajes':viajes})
+	return render(request, "viajes.html", {"form": form, 'lista_viajes': viajes})
+
 
 @login_required
 def creacion_viaje(request):
-	if request.method == "GET":
-		form = FormularioCreacionViaje(request.GET)
-		if form.is_valid():
-			return HttpResponseRedirect("/viajes/")
-		else:
-			form = FormularioCreacionViaje()
+	form = FormularioCreacionViaje(request.POST)
+	if form.is_valid():
+
+		form.save()
+		return HttpResponseRedirect("/viajes/")
+	else:
+		form = FormularioCreacionViaje()
 	return render(request, "creacion_viaje.html", {"form": form})
 
 #return render(request, "crear_viaje.html", {"form": form})
-
-# def crear_viaje(request):
-# 	if request.method == "POST":
-# 		form = FormularioCreacionViaje(request.GET)
-# 		if form.is_valid() and form.Meta.fields[0] != form.Meta.fields[1] :
-
-# 			return HttpResponseRedirect("/viajes/")
-# 		else:
-# 			form = FormularioCreacionViaje()
-# 	return render(request, "creacion_viaje.html", {"form": form})

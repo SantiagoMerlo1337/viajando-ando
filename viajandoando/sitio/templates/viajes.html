@@ -4,17 +4,32 @@
 
 {% block content %}
 
-<div class="container py-5">
+<div class="container py-5 ">
     <form action="." method="get">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Buscar" />
     </form>
     <a href="{% url 'Creacion viaje' %}"><button class="btn bg-primary text-white mt-3">Crear viaje</button></a>
-</div>
+    
 
-{% for viaje in lista_viajes %}
-    <h3 class="text-center">{{viaje}}</h3>
-{% endfor %}
+    <div class="viajes">
+    {% if lista_viajes is None %}
+        <p>No se encontraron resultados.</p>
+    {% else %}
+        {% for viaje in lista_viajes %}
+            <div class="card mt-3" style="width: 28rem;">
+                <div class="card-body">
+                    <h6 class="text-end">{{viaje.fecha}}</h6>
+                    <h5 class="card-title">{{viaje.conductor}}</h5>
+                    <p class="card-text">{{viaje.descripcion}}</p>
+                    <a href="#" class="btn btn-primary">Ver más</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+</div>
 
 {% endblock %}

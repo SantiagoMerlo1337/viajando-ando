@@ -12,4 +12,9 @@
     </form>
     <a href="{% url 'Creacion viaje' %}"><button class="btn bg-primary text-white mt-3">Crear viaje</button></a>
 </div>
+
+{% for viaje in lista_viajes %}
+    <h3 class="text-center">{{viaje}}</h3>
+{% endfor %}
+
 {% endblock %}

@@ -1,7 +1,7 @@
 from subprocess import CREATE_NEW_CONSOLE
 from django.shortcuts import render, HttpResponseRedirect
 
-from sitio.models import Ciudad, Viaje
+from sitio.models import Viaje, Ciudad, Provincia, User
 from .forms import FormularioCreacionViaje, FormularioViajes, NewUserForm
 from django.shortcuts import  render, redirect
 from django.contrib.auth import login
@@ -28,20 +28,20 @@ def home(request):
     return render(request, 'base.html', {})
 
 def viajes(request):
-    if request.method == "GET":
-        form = FormularioViajes(request.GET)
-        if form.is_valid() and form.Meta.fields[0] != form.Meta.fields[1] :
-            return HttpResponseRedirect("/viajes/")
-    else:
-        form = FormularioViajes()
-    return render(request, "viajes.html", {"form": form})
+	if request.method == "GET":
+		form = FormularioViajes(request.GET)
+		if form.is_valid():
+			return HttpResponseRedirect("/viajes/")
+		else:
+			form = FormularioViajes()
+		viajes = Viaje.objects.all()
+	return render(request, "viajes.html", {"form": form, 'lista_viajes':viajes})
 
 @login_required
 def creacion_viaje(request):
 	if request.method == "GET":
 		form = FormularioCreacionViaje(request.GET)
-		if form.is_valid() and form.Meta.fields[0] != form.Meta.fields[1] :
-
+		if form.is_valid():
 			return HttpResponseRedirect("/viajes/")
 		else:
 			form = FormularioCreacionViaje()
@@ -49,12 +49,12 @@ def creacion_viaje(request):
 
 #return render(request, "crear_viaje.html", {"form": form})
 
-def crear_viaje(request):
-	if request.method == "POST":
-		form = FormularioCreacionViaje(request.GET)
-		if form.is_valid() and form.Meta.fields[0] != form.Meta.fields[1] :
+# def crear_viaje(request):
+# 	if request.method == "POST":
+# 		form = FormularioCreacionViaje(request.GET)
+# 		if form.is_valid() and form.Meta.fields[0] != form.Meta.fields[1] :
 
-			return HttpResponseRedirect("/viajes/")
-		else:
-			form = FormularioCreacionViaje()
-	return render(request, "creacion_viaje.html", {"form": form})
+# 			return HttpResponseRedirect("/viajes/")
+# 		else:
+# 			form = FormularioCreacionViaje()
+# 	return render(request, "creacion_viaje.html", {"form": form})

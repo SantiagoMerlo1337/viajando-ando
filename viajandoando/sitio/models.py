@@ -46,7 +46,7 @@ class Viaje(models.Model):
     capacidad = models.PositiveIntegerField()
 
     def get_model_fields(model):
-        return model._meta.fields   
+        return model._meta.fields
 
     class Meta:
         constraints = [

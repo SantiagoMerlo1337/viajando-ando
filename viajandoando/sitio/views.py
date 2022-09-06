@@ -51,7 +51,7 @@ def viajes(request):
 @login_required
 def creacion_viaje(request):
 	form = FormularioCreacionViaje(request.POST)
-	if form.is_valid() and form.cleaned_data['fecha'] > date.today():
+	if form.is_valid() and form.cleaned_data['fecha'] > date.today() and form.cleaned_data['ciudad_origen'] != form.cleaned_data['ciudad_destino']:
 		viaje = form.save(commit=False)
 		viaje.datetime = datetime.combine(viaje.fecha, viaje.hora)
 		viaje.conductor = request.user

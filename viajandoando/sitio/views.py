@@ -27,7 +27,6 @@ def mis_viajes(request):
 def home(request):
     return render(request, 'base.html', {})
 
-
 #VER VIAJES
 def viajes(request):
 	if request.method == "GET":
@@ -42,7 +41,6 @@ def viajes(request):
 		else:
 			form = FormularioViajes()
 	return render(request, "viajes.html", {"form": form, 'lista_viajes': viajes})
-
 
 @login_required
 def creacion_viaje(request):

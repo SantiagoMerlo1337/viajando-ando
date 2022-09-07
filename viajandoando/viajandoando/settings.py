@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-hy-7&01+--*=w!#2^@i16v9_@u__aa4+6vf9c@j=)52vu5*w#d
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'sitio',
     'crispy_forms',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -106,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-AR'
 
 TIME_ZONE = 'UTC'
 
@@ -119,6 +120,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+MEDIA_URL = '/media/' 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'sitio/static'),)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -128,9 +132,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home" 
 
-LANGUAGE_CODE = "es-ES"
 
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'sitio/static'),)
+django_heroku.settings(locals())
 
 #SMTP Configuration
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -139,8 +142,3 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'sitio/static'),)
 # EMAIL_USE_TLS = True
 # EMAIL_HOST_USER = ''
 # EMAIL_HOST_PASSWORD = ''
-
-MEDIA_URL = 'media/' 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-django_heroku.settings(locals())

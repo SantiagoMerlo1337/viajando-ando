@@ -1,13 +1,12 @@
 from dataclasses import field
 from datetime import datetime
 from email.message import EmailMessage
-from tkinter import Widget
 from tokenize import blank_re
 from django import forms
 from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from sitio.models import *
+from sitio.models import Viaje
 from django.contrib.admin.widgets import AdminDateWidget, AdminTimeWidget, AdminSplitDateTime
 
 # Create your forms here.

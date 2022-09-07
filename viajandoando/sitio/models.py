@@ -1,10 +1,3 @@
-from datetime import datetime
-
-from operator import truediv
-from platform import release
-from pyexpat import model
-from sys import maxsize
-
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.admin.widgets import AdminDateWidget, AdminTimeWidget, AdminSplitDateTime

@@ -1,10 +1,6 @@
 from datetime import datetime
-from subprocess import CREATE_NEW_CONSOLE
-from time import process_time_ns
-from xml.etree.ElementInclude import include
 from django.shortcuts import render, HttpResponseRedirect
-
-from sitio.models import Viaje, Ciudad, Provincia, User
+from sitio.models import Viaje
 from .forms import FormularioCreacionViaje, FormularioViajes, NewUserForm
 from django.shortcuts import  render, redirect
 from django.contrib.auth import login

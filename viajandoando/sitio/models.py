@@ -1,5 +1,5 @@
 from datetime import datetime
-from msilib.schema import Class
+
 from operator import truediv
 from platform import release
 from pyexpat import model

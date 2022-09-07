@@ -39,7 +39,10 @@
                         <br>
                         <li>Fecha: {{viaje.datetime}}</li>
                         <br>
-                        <li>Imagen: <img src="{{viaje.imagen}}" alt="Auto" width="250" height="250"></li>
+                        {% if viaje.imagen %}
+                          <li>Imagen: <img src="{{viaje.imagen.url}}" alt="Auto" width="250" height="250"></li>
+                        {% endif %}
+                        
                     </ul>
                 </div>
                 <div class="modal-footer">

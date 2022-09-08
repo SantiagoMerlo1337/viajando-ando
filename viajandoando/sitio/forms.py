@@ -37,7 +37,7 @@ class FormularioViajes(forms.ModelForm):
 class FormularioCreacionViaje(forms.ModelForm):
 	class Meta:
 		model = Viaje
-		fields = ['ciudad_origen','ciudad_destino', 'descripcion', 'capacidad', 'fecha', 'hora', 'imagen']
+		fields = ['ciudad_origen','ciudad_destino', 'descripcion', 'capacidad', 'fecha', 'hora', 'imagen',]
 		widgets = {
 			'fecha': DateTimePickerInput(attrs={'type': 'date'}),
 			'hora': TimePickerInput()

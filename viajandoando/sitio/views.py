@@ -103,7 +103,7 @@ def viajes(request):
 
 @login_required
 def creacion_viaje(request):
-	form = FormularioCreacionViaje(request.POST)
+	form = FormularioCreacionViaje(request.POST, request.FILES)
 	if form.is_valid() and form.cleaned_data['fecha'] > date.today() and form.cleaned_data['ciudad_origen'] != form.cleaned_data['ciudad_destino']:
 		viaje = form.save(commit=False)
 		viaje.datetime = datetime.combine(viaje.fecha, viaje.hora)
@@ -113,26 +113,3 @@ def creacion_viaje(request):
 	else:
 		form = FormularioCreacionViaje()
 	return render(request, "creacion_viaje.html", {"form": form})
-
-#return render(request, "crear_viaje.html", {"form": form})
-
-
-# current_site = get_current_site(request)
-# 		mail_subject = "Activación de cuenta"
-# 		message = render_to_string(
-# 			"templates/prueba.html",
-# 			{
-# 				"user": user,
-# 				"domain": current_site.domain,
-# 				"uid": urlsafe_base64_encode(force_bytes(user.pk)),
-# 				"token": default_token_generator.make_token(user),},
-# 				)
-# 		to_email = form.cleaned_data.get("email")
-# 		send_mail(
-# 			mail_subject,
-# 			"",
-# 			"viajandoando.ingweb@gmail.com",
-# 			[to_email],
-# 			fail_silently=True,
-# 			html_message=message,
-# 			)

@@ -27,7 +27,7 @@ class Viaje(models.Model):
     fecha = models.DateField(blank=True, null=True, default=None)
     hora = models.TimeField(blank=True, null=True, default=None)
 
-    imagen = models.ImageField(upload_to="media/images/", blank=True, null=True)
+    imagen = models.ImageField(blank=True, null=True, upload_to="images/")
 
     ciudad_origen = models.ForeignKey(Ciudad,on_delete=models.CASCADE, related_name='ciudad_origen_set')
     ciudad_destino = models.ForeignKey(Ciudad,on_delete=models.CASCADE, related_name='ciudad_destino_set')

@@ -1,5 +1,0 @@
-//// OBLIGATORIO ////
-
-//// MEJORAS ////
-
-//// FIXES ////

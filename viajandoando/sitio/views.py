@@ -8,6 +8,13 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from datetime import date
 
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode
+from django.utils.encoding import force_bytes
+from django.core.mail import send_mail
+from django.contrib.auth.tokens import default_token_generator 
+
 def register_request(request):
 	if request.method == "POST":
 		form = NewUserForm(request.POST)
@@ -56,3 +63,24 @@ def creacion_viaje(request):
 	return render(request, "creacion_viaje.html", {"form": form})
 
 #return render(request, "crear_viaje.html", {"form": form})
+
+
+# current_site = get_current_site(request)
+# 		mail_subject = "Activación de cuenta"
+# 		message = render_to_string(
+# 			"templates/prueba.html",
+# 			{
+# 				"user": user,
+# 				"domain": current_site.domain,
+# 				"uid": urlsafe_base64_encode(force_bytes(user.pk)),
+# 				"token": default_token_generator.make_token(user),},
+# 				)
+# 		to_email = form.cleaned_data.get("email")
+# 		send_mail(
+# 			mail_subject,
+# 			"",
+# 			"viajandoando.ingweb@gmail.com",
+# 			[to_email],
+# 			fail_silently=True,
+# 			html_message=message,
+# 			)

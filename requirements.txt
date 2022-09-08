@@ -4,3 +4,4 @@ gunicorn
 django-crispy-forms
 django-extensions
 Pillow
+six

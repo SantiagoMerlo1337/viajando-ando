@@ -31,4 +31,5 @@ urlpatterns = [
     path("register", views.register_request, name="register"),
     path("viajes/", views.viajes, name="Viajes"),
     path("creacion_viaje/", views.creacion_viaje, name="Creacion viaje"),
+    path("activate/<uidb64>/<token>", views.activate, name="activate"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

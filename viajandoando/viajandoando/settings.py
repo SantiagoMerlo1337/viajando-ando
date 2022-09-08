@@ -135,12 +135,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home" 
 
-#SMTP Configuration
+#Emailing settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_FROM = 'viajandoando.ingweb@gmail.com'
+EMAIL_HOST_USER = 'viajandoando.ingweb@gmail.com'
+EMAIL_HOST_PASSWORD = 'kxepoqtaakvqozhg'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'viajandoando.ingweb@gmail.com'
-EMAIL_HOST_PASSWORD = ''
+
+PASSWORD_RESET_TIMEOUT = 14400
 
 django_heroku.settings(locals())

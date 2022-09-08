@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import django_heroku
 import os
 from pathlib import Path
+import sitio
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,6 +43,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'django_extensions',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -132,9 +135,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home" 
 
-
-django_heroku.settings(locals())
-
 #SMTP Configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'django.core.mail.backends.smtp.EmailBackend'
@@ -142,3 +142,5 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'viajandoando.ingweb@gmail.com'
 EMAIL_HOST_PASSWORD = ''
+
+django_heroku.settings(locals())

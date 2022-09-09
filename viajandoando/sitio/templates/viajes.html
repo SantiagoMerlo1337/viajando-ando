@@ -14,17 +14,25 @@
 <div class="viajes mt-3 ">
 
 {% if lista_viajes|length == 0 %}
-    <p>No se encontraron resultados.</p>
+    <p class="text-center">No se encontraron resultados.</p>
 {% else %}    
     {% for viaje in lista_viajes %}
-      <div class="card" style="width: 28rem;">
+    <div class="d-flex justify-content-center">
+      <div class="card w-100 w-50-md">
         <div class="card-body">
-            <h6 class="text-end">{{viaje.datetime}}</h6>
-            <h5 class="card-title">{{viaje.conductor}}</h5>
-            <p class="card-text">{{viaje.descripcion}}</p>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{forloop.counter}}">Ver más</button>
+          <div class="d-flex justify-content-between">
+            <h5 class="card-title d-inline">{{viaje.conductor}}</h5>
+            <h6 class="text-end d-inline">{{viaje.datetime}}</h6>
+          </div>
+          <hr>
+            <p class="card-text mb-4">{{viaje.descripcion}}</p>
+            <div class="d-flex justify-content-end">
+              <button type="button" class="btn btn-primary text-center px-5 rounded-pill" data-bs-toggle="modal" data-bs-target="#exampleModal{{forloop.counter}}">Ver más</button>
+            </div>
         </div>
     </div>
+    </div>
+      
 
         <div class="modal fade" id="exampleModal{{forloop.counter}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">

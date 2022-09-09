@@ -9,6 +9,7 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    height: 15rem;
 }
 .tituloInicio{
     font-weight: 700;
@@ -21,4 +22,13 @@ main{
 }
 hr{
     opacity: 0.1;
+}
+.shadowCustom{
+    text-shadow: 0 0 18px black;
+}
+.colorPrim{
+    color: #3da3de;
+}
+.colorSec{
+    color: #07945e;
 }

@@ -4,8 +4,8 @@
 
 {% block content %}
 
-<div class="container py-5">
-  <h2>Inicio de sesión</h2>
+<div class="container py-4 vh-100">
+  <h3 class="h3 pb-3 colorPrim">Inicia sesion</h3>
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}

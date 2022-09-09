@@ -3,7 +3,9 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<div class="container py-5">
+
+<div class="container py-4 vh-100">
+  <h3 class="h3 pb-3 colorPrim">¡Busca tu viaje!</h3>
   <form action="." method="get">
     {% csrf_token %}
     {{ form.as_p }}
@@ -11,14 +13,15 @@
 </form>
 <a href="{% url 'Creacion viaje' %}"><button class="btn bg-primary text-white mt-3">Crear viaje</button></a>
 
-<div class="viajes mt-3 ">
+<div class="viajes mt-3">
 
 {% if lista_viajes|length == 0 %}
     <p class="text-center">No se encontraron resultados.</p>
-{% else %}    
+{% else %}
+    <p class="text-center fs-3 colorSec fw-bolder">{{origen}} ➡ {{destino}}</p>
     {% for viaje in lista_viajes %}
-    <div class="d-flex justify-content-center">
-      <div class="card w-100 w-50-md">
+    <div class="d-flex justify-content-center pt-4">
+      <div class="card shadow w-100 w-50-md rounded">
         <div class="card-body">
           <div class="d-flex justify-content-between">
             <h5 class="card-title d-inline">{{viaje.conductor}}</h5>

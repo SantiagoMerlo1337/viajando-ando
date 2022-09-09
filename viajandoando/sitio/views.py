@@ -91,6 +91,8 @@ def viajes(request):
 	if request.method == "GET":
 		form = FormularioViajes(request.GET)
 		viajes = ''
+		origen = ''
+		destino = ''
 		if form.is_valid() and form.cleaned_data['fecha_inicio'] < form.cleaned_data['fecha_fin'] and form.cleaned_data['ciudad_origen'] != form.cleaned_data['ciudad_destino']:
 			date1 = form.cleaned_data['fecha_inicio']
 			date2 = form.cleaned_data['fecha_fin']
@@ -99,7 +101,7 @@ def viajes(request):
 			viajes = Viaje.objects.filter(datetime__range=[date1, date2], ciudad_origen=origen, ciudad_destino=destino)
 		else:
 			form = FormularioViajes()
-	return render(request, "viajes.html", {"form": form, 'lista_viajes': viajes})
+	return render(request, "viajes.html", {"form": form, 'lista_viajes': viajes, 'origen':origen, 'destino': destino})
 
 @login_required
 def creacion_viaje(request):

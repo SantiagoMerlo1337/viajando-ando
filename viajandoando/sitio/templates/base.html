@@ -15,7 +15,7 @@
 </head>
 <body>
   <header>
-    <nav class="navbar navbar-expand-lg px-md-5">
+    <nav class="navbar navbar-expand-lg px-md-5 shadow-sm">
       <div class="container-fluid">
         <img class="logo" src="{% static 'sitio/img/logo.png' %}" alt="Logo">
           <button class="navbar-toggler bg-primary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,13 +25,13 @@
               <div class="container-fluid d-flex justify-content-between p py-2">
                 <ul class="navbar-nav gap-lg-4 ps-lg-5">
                     <li class="nav-item">
-                      <a class="nav-link active px-3 fw-bold" aria-current="page" href="/">Inicio</a>
+                      <a class="nav-link px-3 fw-bold itemNav rounded-pill" aria-current="page" href="/">Inicio</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link px-3 fw-bold" href="{% url 'Viajes' %}">Viajes</a>
+                      <a class="nav-link px-3 fw-bold itemNav rounded-pill" href="{% url 'Viajes' %}">Viajes</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link px-3 fw-bold" href="{% url 'Mis Viajes' %}">Mis Viajes</a>
+                      <a class="nav-link px-3 fw-bold itemNav rounded-pill" href="{% url 'Mis Viajes' %}">Mis Viajes</a>
                     </li>
                 </ul>
                 <div class="d-flex align-items-center justify-content-between gap-4">

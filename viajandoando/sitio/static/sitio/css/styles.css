@@ -9,7 +9,7 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    height: 15rem;
+    /* height: 15rem; */
 }
 .tituloInicio{
     font-weight: 700;
@@ -27,8 +27,16 @@ hr{
     text-shadow: 0 0 18px black;
 }
 .colorPrim{
-    color: #3da3de;
+    color: #0e6da3;
 }
 .colorSec{
-    color: #07945e;
+    color: #0d9d65;
+}
+.itemNav{
+    color: #0e6da3;
+}
+.cardViaje{
+    width: 600px;
+    /* white-space: nowrap; */
+    min-width: 300px;
 }

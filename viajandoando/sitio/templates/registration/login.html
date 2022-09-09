@@ -2,15 +2,21 @@
 
 {% block title %}Login{% endblock %}
 
+{% load crispy_forms_tags %} 
+
 {% block content %}
+
 
 <div class="container py-4 vh-100">
   <h3 class="h3 pb-3 colorPrim">Inicia sesion</h3>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Iniciar sesion</button>
-  </form>  
+  <div class="d-flex flex-column flex-md-row">
+    
+    <form method="post">
+      {% csrf_token %}
+      {{ form|crispy }}
+      <button type="submit" class="btn bg-primary text-white me-3 my-3">Iniciar sesion</button>
+    </form>  
+  </div>
 </div>
 
 {% endblock %}

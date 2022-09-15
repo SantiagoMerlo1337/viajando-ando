@@ -85,7 +85,6 @@ def mis_viajes(request):
 def home(request):
     return render(request, 'base.html', {})
 
-#VER VIAJES
 def viajes(request):
 	if request.method == "GET":
 		form = FormularioViajes(request.GET)

@@ -32,8 +32,7 @@ class Viaje(models.Model):
     ciudad_origen = models.ForeignKey(Ciudad,on_delete=models.CASCADE, related_name='ciudad_origen_set')
     ciudad_destino = models.ForeignKey(Ciudad,on_delete=models.CASCADE, related_name='ciudad_destino_set')
 
-    user1 = models.ForeignKey(User,on_delete=models.CASCADE, related_name='user1_set', blank=True, null=True, default=None)
-    user2 = models.ForeignKey(User,on_delete=models.CASCADE, related_name='user2_set', blank=True, null=True, default=None)
+    pasajeros = models.ManyToManyField(User, null=True, default=None)
     
     descripcion = models.CharField(max_length=250)
     capacidad = models.PositiveIntegerField()

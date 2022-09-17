@@ -1,18 +1,14 @@
 from datetime import datetime
-import email
-import re
-from typing import Protocol
 from django.shortcuts import render, HttpResponseRedirect
-from sitio.models import Viaje
+from sitio.models import Viaje, Conductor, UsuarioPeticion
 from .forms import FormularioCreacionViaje, FormularioViajes, NewUserForm
 from django.shortcuts import  render, redirect
-from django.contrib.auth import login
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from datetime import date
 
 
-from django.contrib.auth import login, logout, authenticate, get_user_model
+from django.contrib.auth import login, get_user_model
 
 from .tokens import account_activation_token
 from django.template.loader import render_to_string
@@ -86,25 +82,29 @@ def home(request):
     return render(request, 'base.html', {})
 
 def viajes(request):
+	form = ''
+	viajes = ''
+	origen = ''
+	destino = ''
 	if request.method == "GET":
 		form = FormularioViajes(request.GET)
-		viajes = ''
-		origen = ''
-		destino = ''
 		if form.is_valid() and form.cleaned_data['fecha_inicio'] < form.cleaned_data['fecha_fin'] and form.cleaned_data['ciudad_origen'] != form.cleaned_data['ciudad_destino']:
 			date1 = form.cleaned_data['fecha_inicio']
 			date2 = form.cleaned_data['fecha_fin']
 			origen = form.cleaned_data['ciudad_origen']
 			destino = form.cleaned_data['ciudad_destino']
 			viajes = Viaje.objects.filter(datetime__range=[date1, date2], ciudad_origen=origen, ciudad_destino=destino)
-		else:
-			form = FormularioViajes()
+			
 	return render(request, "viajes.html", {"form": form, 'lista_viajes': viajes, 'origen':origen, 'destino': destino})
 
 @login_required
 def creacion_viaje(request):
 	form = FormularioCreacionViaje(request.POST, request.FILES)
-	if form.is_valid() and form.cleaned_data['fecha'] > date.today() and form.cleaned_data['ciudad_origen'] != form.cleaned_data['ciudad_destino']:
+	prueba = False
+	if Conductor.objects.filter(user=request.user).count() == 1:
+		prueba = True
+		
+	if form.is_valid() and form.cleaned_data['fecha'] > date.today() and form.cleaned_data['ciudad_origen'] != form.cleaned_data['ciudad_destino'] and prueba == True:
 		viaje = form.save(commit=False)
 		viaje.datetime = datetime.combine(viaje.fecha, viaje.hora)
 		viaje.conductor = request.user

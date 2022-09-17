@@ -18,7 +18,6 @@
   </form>
   <a href="{% url 'Creacion viaje' %}"><button class="btn bg-success text-white">Crear viaje</button></a>
 
-
 <div class="viajes mt-3">
 
 {% if lista_viajes|length == 0 %}
@@ -61,7 +60,9 @@
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                   <button type="button" class="btn btn-primary">Contactar</button>
-                  <button type="button" class="btn btn-success">Solicitar Unirme</button>
+                  <form action="." method="post">
+                    <button type="submit" class="btn btn-success">Solicitar Unirme</button>
+                  </form>
                 </div>
               </div>
             </div>

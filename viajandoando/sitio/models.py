@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.contrib.admin.widgets import AdminDateWidget, AdminTimeWidget, AdminSplitDateTime
 
 # Create your models here.
 
@@ -27,15 +26,15 @@ class Viaje(models.Model):
     fecha = models.DateField(blank=True, null=True, default=None)
     hora = models.TimeField(blank=True, null=True, default=None)
 
-    imagen = models.ImageField(blank=True, null=True, upload_to="images/")
-
     ciudad_origen = models.ForeignKey(Ciudad,on_delete=models.CASCADE, related_name='ciudad_origen_set')
     ciudad_destino = models.ForeignKey(Ciudad,on_delete=models.CASCADE, related_name='ciudad_destino_set')
 
-    pasajeros = models.ManyToManyField(User, null=True, default=None)
-    
+    pasajeros = models.ManyToManyField(User, through='UsuarioPeticion')
+
+    imagen = models.ImageField(upload_to="images/")
     descripcion = models.CharField(max_length=250)
     capacidad = models.PositiveIntegerField()
+    ocupados = models.PositiveIntegerField(default=0)
 
     def get_model_fields(model):
         return model._meta.fields
@@ -46,3 +45,8 @@ class Viaje(models.Model):
                 fields=['conductor', 'datetime'], name='unique_conductor_datetime_combination'
             )
         ]
+
+class UsuarioPeticion(models.Model):
+    viaje = models.ForeignKey(Viaje, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    estaAceptado = models.BooleanField(default=False)

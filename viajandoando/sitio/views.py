@@ -71,9 +71,6 @@ def register_request(request):
 		form = NewUserForm()
 	return render (request=request, template_name="register.html", context={"register_form":form})
 
-	# login(request, user)
-	# 		messages.success(request, f"Nueva cuenta creada: {user.username}" )
-
 @login_required
 def mis_viajes(request):	
 	return render(request, 'mis_viajes.html', {},)
@@ -94,7 +91,6 @@ def viajes(request):
 			origen = form.cleaned_data['ciudad_origen']
 			destino = form.cleaned_data['ciudad_destino']
 			viajes = Viaje.objects.filter(datetime__range=[date1, date2], ciudad_origen=origen, ciudad_destino=destino)
-			
 	return render(request, "viajes.html", {"form": form, 'lista_viajes': viajes, 'origen':origen, 'destino': destino})
 
 @login_required

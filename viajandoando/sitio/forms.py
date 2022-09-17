@@ -43,3 +43,5 @@ class FormularioCreacionViaje(forms.ModelForm):
 			'hora': TimePickerInput()
 		}
 		
+class Viaje_Id(forms.ModelForm):
+	

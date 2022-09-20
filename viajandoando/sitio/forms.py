@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from sitio.models import Viaje
+from sitio.models import UsuarioPeticion, Viaje
 
 # Create your forms here.
 
@@ -41,6 +41,3 @@ class FormularioCreacionViaje(forms.ModelForm):
 			'fecha': DateTimePickerInput(attrs={'type': 'date'}),
 			'hora': TimePickerInput()
 		}
-		
-class Viaje_Id(forms.Form):
-	viaje_id = forms.IntegerField()

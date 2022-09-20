@@ -33,13 +33,12 @@
           <hr>
             <p class="card-text mb-4">{{viaje.descripcion}}</p>
             <div class="d-flex justify-content-end">
-              <button type="button" class="btn btn-primary text-center px-5 rounded-pill" data-bs-toggle="modal" data-bs-target="#exampleModal{{forloop.counter}}">Ver más</button>
+              <button type="button" class="btn btn-primary text-center px-5 rounded-pill" data-bs-toggle="modal" data-bs-target="#exampleModal{{viaje.id}}">Ver más</button>
             </div>
         </div>
       </div>
     </div>
-
-        <div class="modal fade" id="exampleModal{{forloop.counter}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="exampleModal{{viaje.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
@@ -58,15 +57,13 @@
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                   <button type="button" class="btn btn-primary">Contactar</button>
-                  
+                  <button class="btn bg-success text-white my-3" type="button" id="{{viaje.id}}">Solicitar Unirme</button>
                   <!-- VER POST AJAX -->
-                  <form action="." method="post">
+                  {% comment %} <form action="." method="post">
                     {% csrf_token %}
-                    {{ aaa|crispy }}
-                    <button class="btn bg-success text-white my-3" type="submit">Solicitar Unirme</button>
-                  </form>
-
-                  
+                    <input type="int" id="viajeid" name="viajeid" value="{{viaje.id}}">
+                    {{ CrearSolicitud|crispy }}
+                  </form> {% endcomment %}
                 </div>
               </div>
             </div>

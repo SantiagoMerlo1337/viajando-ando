@@ -1,13 +1,13 @@
 from datetime import datetime
 from django.shortcuts import render, HttpResponseRedirect
 from sitio.models import Viaje, Conductor, UsuarioPeticion
-from .forms import FormularioCreacionViaje, FormularioViajes, NewUserForm, Viaje_Id
+from .forms import FormularioCreacionViaje, FormularioViajes, NewUserForm
 from django.shortcuts import  render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from datetime import date
 
-from django.contrib.auth import login, get_user_model
+from django.contrib.auth import get_user_model
 
 from .tokens import account_activation_token
 from django.template.loader import render_to_string
@@ -90,8 +90,6 @@ def viajes(request):
 			origen = form.cleaned_data['ciudad_origen']
 			destino = form.cleaned_data['ciudad_destino']
 			viajes = Viaje.objects.filter(datetime__range=[date1, date2], ciudad_origen=origen, ciudad_destino=destino)
-	if request.method == "post":
-		aaa = Viaje_Id(request.post)
 	return render(request, "viajes.html", {"form": form, 'lista_viajes': viajes, 'origen':origen, 'destino': destino})
 
 @login_required

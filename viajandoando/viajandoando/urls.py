@@ -32,4 +32,5 @@ urlpatterns = [
     path("viajes/", views.viajes, name="Viajes"),
     path("creacion_viaje/", views.creacion_viaje, name="Creacion viaje"),
     path("activate/<uidb64>/<token>", views.activate, name="activate"),
+    # path('api/pasajero', views.)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

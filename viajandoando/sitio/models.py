@@ -35,7 +35,7 @@ class Viaje(models.Model):
     descripcion = models.CharField(max_length=250)
     capacidad = models.PositiveIntegerField()
     ocupados = models.PositiveIntegerField(default=0)
-
+    
     def get_model_fields(model):
         return model._meta.fields
 

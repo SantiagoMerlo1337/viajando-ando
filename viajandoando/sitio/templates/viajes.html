@@ -10,9 +10,7 @@
   <h3 class="h3 pb-3 colorPrim">¡Busca tu viaje!</h3>
   <form action="." method="get">
     <div class="d-flex flex-column flex-md-row justify-content-lg-start text-center gap-4">
-      <!-- {% csrf_token %} -->
       {{ form|crispy }}
-      
     </div>
     <input class="btn bg-primary text-white me-3 my-3" type="submit" value="Buscar" />
   </form>
@@ -60,11 +58,15 @@
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                   <button type="button" class="btn btn-primary">Contactar</button>
-                  <form action="." method="POST">
+                  
+                  <!-- VER POST AJAX -->
+                  <form action="." method="post">
                     {% csrf_token %}
-                    {{ form|crispy }}
+                    {{ aaa|crispy }}
                     <button class="btn bg-success text-white my-3" type="submit">Solicitar Unirme</button>
                   </form>
+
+                  
                 </div>
               </div>
             </div>

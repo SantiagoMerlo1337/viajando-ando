@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container py-4 vh-100">
+	<h3 class="h3 pb-3 colorPrim">Registrarse</h3>
+	<div class="d-flex flex-column flex-md-row">
+		<form method="POST">
+			{% csrf_token %}
+			{{ register_form|crispy }}
+			<button class="btn btn-primary my-3" type="submit">Registrarse</button>
+		</form>
+	</div>
+	<p class="text-center">Si ya tienes una cuenta, <a href="/accounts/login">inicia sesión.</a></p>
+</div>
+{% endblock %}

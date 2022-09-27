@@ -13,24 +13,26 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-import os
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include
 from django.views.generic.base import TemplateView
-from sitio import views
+from viajes import views as viajes_views
+from users import views as user_views
 from django.conf import settings
 from django.conf.urls.static import static
+
+import viajes
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("accounts/", include("django.contrib.auth.urls")),
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
     path("", TemplateView.as_view(template_name="home.html"), name="home"),
-    path('mis_viajes/', views.mis_viajes, name="Mis Viajes"),
-    path("register", views.register_request, name="register"),
-    path("viajes/", views.viajes, name="Viajes"),
-    path("creacion_viaje/", views.creacion_viaje, name="Creacion viaje"),
-    path("activate/<uidb64>/<token>", views.activate, name="activate"),
-    # path('api/pasajero', views.)
+    path("register", user_views.register_request, name="register"),
+    path("activate/<uidb64>/<token>", user_views.activate, name="activate"),
+    path("viajes/", viajes_views.viajes, name="viajes"),
+    path("viajes/crear/", viajes_views.crear_viaje, name="crear viaje"),
+    path('api/viajes/<int:id>', viajes_views.obtener_viaje, name="obtener viaje"),
+    path('api/viajes', viajes_views.obtener_viajes, name="obtener viajes")
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

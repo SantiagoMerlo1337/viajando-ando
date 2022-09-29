@@ -42,11 +42,10 @@ def crear_viaje(request):
 	return render(request, "viajes/crear.html", {"form": form})
 
 def obtener_viaje(request, id):
-    viaje = Viaje.objects.get(id=id)
-
-    return JsonResponse({"descripcion": viaje.descripcion, "fecha": viaje.fecha, "hora": viaje.hora,"capacidad": viaje.capacidad, "conductor": viaje.conductor.id})
+	viaje = Viaje.objects.get(id=id)
+	return JsonResponse({"conductor_nombre": viaje.conductor.username,"conductor": viaje.conductor.id, "descripcion": viaje.descripcion, "fecha": viaje.fecha, "hora": viaje.hora,"capacidad": viaje.capacidad, "imagen_vehiculo": str(viaje.imagen_vehiculo)})
 
 def obtener_viajes(request):
-	viajes = Viaje.objects.all().values('id', 'datetime', 'descripcion', 'capacidad', 'ocupados', 'ciudad_destino_id', 'ciudad_origen_id', 'conductor_id')
+	viajes = Viaje.objects.all().values('id', 'conductor', 'datetime', 'descripcion', 'capacidad', 'ocupados', 'ciudad_destino_id', 'ciudad_origen_id', 'conductor_id', 'imagen_vehiculo')
 	viajes = list(viajes)
 	return JsonResponse(viajes, safe=False)

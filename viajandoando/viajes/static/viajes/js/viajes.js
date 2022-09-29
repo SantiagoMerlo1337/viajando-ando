@@ -17,4 +17,25 @@ $(document).ready(function () {
             }
         });
     });
+    $(".boton-solicitar-unirse").click(function (e) { 
+        e.preventDefault();
+        var idSolicitud = $(this).data("solicitud-id");
+        $.post("viajes.html", data,
+            function (data, textStatus, jqXHR) {
+                
+            },
+            "dataType"
+        );
+        $.ajax({
+            type: "post",
+            url: "/viajes",
+            data: {"id":idSolicitud},
+            dataType: "dataType",
+            success: function (response) {
+                
+            }
+        });
+
+
+    });
 });

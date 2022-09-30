@@ -29,3 +29,6 @@ class CrearViajeFormulario(forms.ModelForm):
 class CrearUsuarioPeticionFormulario(forms.Form):
 	user = forms.IntegerField()
 	viaje = forms.IntegerField()
+
+class EditarUsuarioPeticionFormulario(forms.Form):
+	esta_aceptado = forms.BooleanField()

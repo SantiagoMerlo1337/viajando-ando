@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content_info %}
+<div class="container">
+    <div class="card w-100">
+        <div class="card-body">
+          <h5 class="card-title">{{viaje.conductor}}</h5>
+          <p class="card-text">Descripcion: {{viaje.descripcion}}</p>
+          <p class="card-text">Capacidad maxima: {{viaje.capacidad}}</p>
+          <p class="card-text">Ocupados: {{viaje.ocupados}}</p>
+          <p class="card-text">Imagen vehiculo: </p>
+          <img src="/media/{{viaje.imagen_vehiculo}}" style="width: 30%;" alt="Auto">
+        </div>
+      </div>
+
+    {% for usuario in lista_usuario_peticion %}
+    <div class="card w-50">
+        <div class="card-body">
+          <h5 class="card-title">{{usuario.user.username}}</h5>
+          <p class="card-text">Usuario ID: {{usuario.user.id}}</p>
+          <p class="card-text">Estado: 
+                  {% if usuario.esta_aceptado == None %}
+                    Pendiente ⏲
+                    {% elif usuario.esta_aceptado == True %}
+                      Aceptado ✅
+                    {% else %}
+                      Rechazado ❌
+                  {% endif %}
+          </p>
+          <a class="btn btn-primary text-center px-4 rounded-pill" href="{{viaje.id}}/{{usuario.user.id}}">Acciones</a>
+        </div>
+    </div>
+
+    {% endfor %}
+
+</div>
+
+
+
+{% endblock %}

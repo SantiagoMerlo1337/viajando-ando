@@ -55,7 +55,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-              <button type="button" class="btn btn-primary">Contactar</button>
+              <a class="btn btn-primary" href="https://wa.me/+54{{viaje.conductor.celular}}">Contactar</a>
 
               <form method="POST" action="">
                 {% csrf_token %}

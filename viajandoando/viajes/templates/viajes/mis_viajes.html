@@ -6,7 +6,7 @@
 
 <div class="viajes">
   {% if viajes_creados|length == 0 %}
-    <p class="text-center">No se encontraron resultados.</p>
+    <p class="text-center">No se encontraron resultados de viajes creados.</p>
   {% else %}
     <p class="text-center fs-3">VIAJES CREADOS</p>
     {% for viaje in viajes_creados %}
@@ -20,33 +20,8 @@
             <hr>
               <p class="card-text mb-4">{{viaje.descripcion}}</p>
               <div class="d-flex justify-content-end">
-                <button type="button" class="btn btn-primary text-center px-5 rounded-pill" data-bs-toggle="modal" data-bs-target="#exampleModal{{viaje.id}}">Ver más</button>
+                <a class="btn btn-success text-center px-4 rounded-pill" href="misviajes/{{viaje.id}}">Ver en detalle</a>
               </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="modal fade" id="exampleModal{{viaje.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title fs-4" id="exampleModalLabel">
-                {{viaje.conductor}}
-              </h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <ul>
-                    <li>Descripcion: {{viaje.descripcion}}</li>
-                      <br>
-                    <li>Fecha: {{viaje.datetime}}</li>
-                      <br>
-                    <li>Imagen: <img src="{{viaje.imagen_vehiculo.url}}" alt="Auto" width="90%"></li>
-                </ul>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 from django.db import models
-from users.models import User
+from users.models import Conductor, User
 
 # Create your models here.
 
@@ -16,7 +16,7 @@ class Ciudad(models.Model):
         return string
 
 class Viaje(models.Model):
-    conductor = models.ForeignKey(User,on_delete=models.CASCADE, related_name='conductor_set')
+    conductor = models.ForeignKey(Conductor,on_delete=models.CASCADE, related_name='conductor_set')
     datetime = models.DateTimeField(blank=True, null=True, default=None)
 
     fecha = models.DateField(blank=True, null=True, default=None)

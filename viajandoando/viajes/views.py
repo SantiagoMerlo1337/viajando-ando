@@ -32,7 +32,6 @@ def viajes(request):
 		if form.is_valid():
 			cd = form.cleaned_data
 			viaje = Viaje.objects.get(pk=cd['viaje'])
-			print(viaje)
 			pc = UsuarioPeticion(
                 viaje = viaje,
                 user = request.user
@@ -53,7 +52,8 @@ def crear_viaje(request):
 	if form.is_valid() and form.cleaned_data['fecha'] >= date.today() and form.cleaned_data['ciudad_origen'] != form.cleaned_data['ciudad_destino'] and prueba == True:
 		viaje = form.save(commit=False)
 		viaje.datetime = datetime.combine(viaje.fecha, viaje.hora)
-		viaje.conductor = request.user
+		conductor = Conductor.objects.get(user_id=request.user.id)
+		viaje.conductor = conductor
 		form.save()
 		return HttpResponseRedirect("/viajes/")
 	else:
@@ -63,28 +63,36 @@ def crear_viaje(request):
 @login_required
 def mis_viajes(request):
 	if request.method == "GET":
-		# Como retorno personas??
-		viajes_creados = Viaje.objects.filter(conductor_id=request.user)
+		conductor = Conductor.objects.get(user_id=request.user.id)
+		viajes_creados = Viaje.objects.filter(conductor_id=conductor)
 		viajes_solicitados = UsuarioPeticion.objects.filter(user_id=request.user)
-		
-		
-
-	# else:
-	# 	form = CrearUsuarioPeticionFormulario(request.POST, request.FILES)
-	# 	if form.is_valid():
-	# 		cd = form.cleaned_data
-	# 		viaje = Viaje.objects.get(pk=cd['viaje'])
-	# 		print(viaje)
-	# 		pc = UsuarioPeticion(
-    #             viaje = viaje,
-    #             user = request.user
-    #         )
-	# 		if UsuarioPeticion.objects.filter(user=request.user, viaje=viaje).count() == 0:
-	# 			pc.save()
-	# 		else:
-	# 			messages.error(request, 'Ya solicitaste unirte a este viaje.')
-	# 		return HttpResponseRedirect("/viajes")
 	return render(request, "viajes/mis_viajes.html", {'viajes_solicitados': viajes_solicitados, 'viajes_creados': viajes_creados})
+
+@login_required
+def mis_viajes_detalle(request, id):
+	if request.method == "GET":
+		viaje = Viaje.objects.get(id=id)
+		lista_usuario_peticion = UsuarioPeticion.objects.filter(viaje_id=id)
+		print(lista_usuario_peticion)
+	
+	return render(request, "viajes/mis_viajes_detalle.html", {'viaje': viaje, 'lista_usuario_peticion': lista_usuario_peticion})
+
+def mis_viajes_detalle_user(request, id, id2):
+	usuario = UsuarioPeticion.objects.get(user_id=id2)
+	if request.method == "GET":
+		usuario = UsuarioPeticion.objects.get(user_id=id2)
+	else:
+		form = EditarUsuarioPeticionFormulario(request.POST, request.FILES)
+		if form.is_valid():
+			cd = form.cleaned_data
+			print(cd)
+			print('ENTRO')
+			usuario.__dict__.update(esta_aceptado=cd['esta_aceptado'])
+			usuario.save()
+		return HttpResponseRedirect("/viajes/misviajes/" + str(id))
+
+	return render(request, "viajes/mis_viajes_detalle_user.html", {'usuario': usuario})
+		
 
 
 # API

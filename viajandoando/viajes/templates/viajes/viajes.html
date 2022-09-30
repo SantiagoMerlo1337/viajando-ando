@@ -31,42 +31,45 @@
             <hr>
               <p class="card-text mb-4">{{viaje.descripcion}}</p>
               <div class="d-flex justify-content-end">
-                <button type="button" data-viaje-id="{{viaje.id}}" class="btn btn-primary text-center px-5 rounded-pill boton-ver-mas" data-bs-toggle="modal" data-bs-target="#exampleModal">Ver más</button>
+                <button type="button" class="btn btn-primary text-center px-5 rounded-pill" data-bs-toggle="modal" data-bs-target="#exampleModal{{viaje.id}}">Ver más</button>
               </div>
           </div>
         </div>
       </div>
-    {% endfor %}
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title fs-4" id="exampleModalLabel">
-              <!-- CONDUCTOR -->
-            </h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-              <ul>
-                  <li class="modal-body-descripcion"></li>
-                  <br>
-                  <li class="modal-body-fecha"></li>
-                  <br>
-                  <li class="modal-body-hora"></li>
-                  <br>
-                  <li class="modal-body-imagen"></li>
-              </ul>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-primary">Contactar</button>
-            <button class="btn bg-success text-white my-3 boton-solicitar-unirse" type="button" data-solicitud-id="{{userActivo}}" data-solicitud-id="{{viaje.id}}">Solicitar Unirme</button>
+      <div class="modal fade" id="exampleModal{{viaje.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title fs-4" id="exampleModalLabel">{{viaje.conductor}}</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <ul>
+                    <li>Descripcion: {{viaje.descripcion}}</li>
+                      <br>
+                    <li>Fecha: {{viaje.datetime}}</li>
+                      <br>
+                    <li>Imagen: <img src="{{viaje.imagen_vehiculo.url}}" alt="Auto" width="90%"></li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-primary">Contactar</button>
+
+              <form method="POST" action="">
+                {% csrf_token %}
+                <input type="hidden" name="user" value="0" />
+                <input type="hidden" name="viaje" value="{{viaje.id}}"/>
+                <input type="submit" name="solicitar_unirse" id="solicitud{{viaje.id}}">
+              </form>
+
+              <!-- <button id="{{viaje.id}}" class="btn bg-success text-white my-3 boton-solicitar-unirse" type="button">Solicitar Unirme</button> -->
+            </div>
           </div>
         </div>
       </div>
-    </div>
-
+    {% endfor %}
   {% endif %}
 </div>
 {% endblock %}

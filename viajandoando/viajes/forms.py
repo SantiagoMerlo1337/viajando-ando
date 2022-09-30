@@ -1,5 +1,5 @@
 from django import forms
-from viajes.models import Viaje
+from viajes.models import UsuarioPeticion, Viaje
 
 #WIDGETS
 
@@ -25,3 +25,7 @@ class CrearViajeFormulario(forms.ModelForm):
 			'fecha': DatePickerInput(attrs={'type': 'date'}),
 			'hora': TimePickerInput()
 		}
+
+class CrearUsuarioPeticionFormulario(forms.Form):
+	user = forms.IntegerField()
+	viaje = forms.IntegerField()

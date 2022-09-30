@@ -8,7 +8,6 @@ $(document).ready(function () {
             data: {"id":idViaje},
             dataType: "json",
             success: function (response) {
-                console.log(response)
                 $(".modal-title").html(response.conductor_nombre);
                 $(".modal-body-descripcion").html("Descripcion: " + response.descripcion);
                 $(".modal-body-fecha").html("Fecha: " + response.fecha);
@@ -17,25 +16,21 @@ $(document).ready(function () {
             }
         });
     });
-    $(".boton-solicitar-unirse").click(function (e) { 
-        e.preventDefault();
-        var idSolicitud = $(this).data("solicitud-id");
-        $.post("viajes.html", data,
-            function (data, textStatus, jqXHR) {
-                
-            },
-            "dataType"
-        );
-        $.ajax({
-            type: "post",
-            url: "/viajes",
-            data: {"id":idSolicitud},
-            dataType: "dataType",
-            success: function (response) {
-                
-            }
-        });
-
-
-    });
+    // $(".boton-solicitar-unirse").click(function (e) { 
+    //     e.preventDefault();
+    //     var idSolicitud = $(this).data("solicitud-id");
+    //     $.post("viajes.html", data,
+    //         function (data, textStatus, jqXHR) {
+    //         },
+    //         "dataType"
+    //     );
+    //     $.ajax({
+    //         type: "post",
+    //         url: "/viajes",
+    //         data: {"id":idSolicitud},
+    //         dataType: "dataType",
+    //         success: function (response) {  
+    //         }
+    //     });
+    // });
 });

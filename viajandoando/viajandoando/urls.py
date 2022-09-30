@@ -32,6 +32,7 @@ urlpatterns = [
     path("register", user_views.register_request, name="register"),
     path("activate/<uidb64>/<token>", user_views.activate, name="activate"),
     path("viajes/", viajes_views.viajes, name="viajes"),
+    path("viajes/misviajes", viajes_views.mis_viajes, name="mis viajes"),
     path("viajes/crear/", viajes_views.crear_viaje, name="crear viaje"),
     path('api/viajes/<int:id>', viajes_views.obtener_viaje, name="obtener viaje"),
     path('api/viajes', viajes_views.obtener_viajes, name="obtener viajes")

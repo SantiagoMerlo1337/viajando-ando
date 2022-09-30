@@ -19,3 +19,7 @@ class AdminConductor(admin.ModelAdmin):
 @admin.register(Viaje)
 class AdminViaje(admin.ModelAdmin):
     list_display = ('conductor_id', 'ciudad_origen_id','ciudad_destino_id', 'descripcion', 'capacidad',)
+
+@admin.register(UsuarioPeticion)
+class AdminUsuarioPeticion(admin.ModelAdmin):
+    list_display = ('viaje', 'user', 'esta_aceptado')

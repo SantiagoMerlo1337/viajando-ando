@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from .forms import NewUserForm
 from django.shortcuts import  render, redirect
 from django.contrib import messages
 from django.contrib.auth import get_user_model
@@ -10,6 +9,9 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.core.mail import EmailMessage
 from .decorators import user_not_authenticated
+from viajes.models import *
+from users.models import *
+from .forms import *
 
 def activate(request, uidb64, token):
     User = get_user_model()

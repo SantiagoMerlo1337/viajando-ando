@@ -30,6 +30,9 @@
                     <li class="nav-item">
                       <a class="nav-link px-3 fw-bold itemNav rounded-pill" href="{% url 'viajes' %}">Viajes</a>
                     </li>
+                    <li class="nav-item">
+                      <a class="nav-link px-3 fw-bold itemNav rounded-pill" href="{% url 'mis viajes' %}">Mis viajes</a>
+                    </li>
                 </ul>
                 <div class="d-flex align-items-center justify-content-between gap-4">
                   {% if user.is_authenticated %}
@@ -46,6 +49,15 @@
     </nav>     
   </header>
   <main>
+
+    {% if messages %}
+      <ul class="messages">
+      {% for message in messages %}
+        <div class="alert alert-primary mt-2{% if message.tags %}{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+      {% endfor %}
+      </ul>
+    {% endif %}
+
     {% block content_info %}
 
 
@@ -56,8 +68,8 @@
 
     {% endblock %}
   </main>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-  <script src="{% static 'viajes/js/viajes.js' %}"></script>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script> -->
+  <!-- <script src="{% static 'viajes/js/viajes.js' %}"></script> -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 </body>
 </html>

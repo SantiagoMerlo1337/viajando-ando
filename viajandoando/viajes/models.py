@@ -45,7 +45,7 @@ class Viaje(models.Model):
 class UsuarioPeticion(models.Model):
     viaje = models.ForeignKey(Viaje, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    estaAceptado = models.BooleanField(default=False)
+    esta_aceptado = models.BooleanField(null=True, default=None)
 
     class Meta:
         constraints = [

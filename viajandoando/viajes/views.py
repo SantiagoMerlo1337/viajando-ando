@@ -1,7 +1,4 @@
-from mimetypes import common_types
-from tkinter.messagebox import RETRY
 from django.shortcuts import render, HttpResponseRedirect
-from django.urls import is_valid_path
 from viajes.models import *
 from users.models import *
 from .forms import *

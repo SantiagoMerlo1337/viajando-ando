@@ -39,3 +39,6 @@ hr{
     width: 600px;
     min-width: 300px;
 }
+.btn-form{
+    display: inline;
+}

@@ -6,7 +6,7 @@
 
 <div class="viajes">
   {% if viajes_creados|length == 0 %}
-    <p class="text-center">No se encontraron resultados de viajes creados.</p>
+    <p class="text-center py-4">No se encontraron resultados de viajes creados.</p>
   {% else %}
     <p class="text-center fs-3">VIAJES CREADOS</p>
     {% for viaje in viajes_creados %}
@@ -30,7 +30,7 @@
 
   <div class="viajes">
     {% if viajes_solicitados|length == 0 %}
-      <p class="text-center">No se encontraron resultados de viajes solicitados.</p>
+      <p class="text-center py-4">No se encontraron resultados de viajes solicitados.</p>
     {% else %}
       <p class="text-center fs-3 mt-2">VIAJES SOLICITADOS</p>
       {% for peticion in viajes_solicitados %}

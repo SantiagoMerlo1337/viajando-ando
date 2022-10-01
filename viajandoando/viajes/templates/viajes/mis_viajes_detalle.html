@@ -7,18 +7,17 @@
           <h5 class="card-title">{{viaje.conductor}}</h5>
           <p class="card-text">Descripcion: {{viaje.descripcion}}</p>
           <p class="card-text">Capacidad maxima: {{viaje.capacidad}}</p>
-          <p class="card-text">Ocupados: {{viaje.ocupados}}</p>
+          <p class="card-text">Lugares disponibles: {{viaje.disponible}}</p>
           <p class="card-text">Imagen vehiculo: </p>
           <img src="/media/{{viaje.imagen_vehiculo}}" style="width: 30%;" alt="Auto">
         </div>
       </div>
-
+  <div class="d-flex justify-content-center">
     {% for usuario in lista_usuario_peticion %}
-    <div class="card w-50">
+    <div class="card w-50 my-4">
         <div class="card-body">
           <h5 class="card-title">{{usuario.user.username}}</h5>
-          <p class="card-text">Usuario ID: {{usuario.user.id}}</p>
-          <p class="card-text">Estado: 
+          <p class="card-text d-inline">Estado: 
                   {% if usuario.esta_aceptado == None %}
                     Pendiente ⏲
                     {% elif usuario.esta_aceptado == True %}
@@ -27,12 +26,25 @@
                       Rechazado ❌
                   {% endif %}
           </p>
-          <a class="btn btn-primary text-center px-4 rounded-pill" href="{{viaje.id}}/{{usuario.user.id}}">Acciones</a>
+          <!-- ACEPTAR -->
+          <div class="d-flex justify-content-end">
+            <form method="POST" action="" class="d-inline m-0 justify-content-end">
+              {% csrf_token %}
+              <input type="hidden" name="esta_aceptado" value="{{usuario.id}}"/>
+              <input class="btn btn-success" value="Aceptar" type="submit" name="aceptar">
+            </form>
+            <!-- RECHAZAR -->
+            <form method="POST" action="" class="d-inline ps-2 m-0 justify-content-end">
+              {% csrf_token %}
+              <input type="hidden" name="esta_aceptado" value="{{usuario.id}}"/>
+              <input class="btn btn-danger" value="Rechazar" type="submit" name="rechazar">
+            </form>          
+          </div>
         </div>
     </div>
 
     {% endfor %}
-
+  </div>
 </div>
 
 

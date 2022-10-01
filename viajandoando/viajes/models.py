@@ -30,8 +30,9 @@ class Viaje(models.Model):
     imagen_vehiculo = models.ImageField(upload_to="images/")
     descripcion = models.CharField(max_length=250)
     capacidad = models.PositiveIntegerField()
-    ocupados = models.PositiveIntegerField(default=0)
-    
+    disponible = models.PositiveIntegerField(null=True, blank=True, default=None)
+
+
     def get_model_fields(model):
         return model._meta.fields
 

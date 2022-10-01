@@ -34,7 +34,6 @@ urlpatterns = [
     path("viajes/", viajes_views.viajes, name="viajes"),
     path("viajes/misviajes", viajes_views.mis_viajes, name="mis viajes"),
     path("viajes/misviajes/<int:id>", viajes_views.mis_viajes_detalle, name="mis_viajes_detalle"),
-    path("viajes/misviajes/<int:id>/<int:id2>", viajes_views.mis_viajes_detalle_user, name="mis_viajes_detalle_user"),
     path("viajes/crear/", viajes_views.crear_viaje, name="crear viaje"),
     path('api/viajes/<int:id>', viajes_views.obtener_viaje, name="obtener viaje"),
     path('api/viajes', viajes_views.obtener_viajes, name="obtener viajes")

@@ -30,6 +30,7 @@
             </div>
             <hr>
               <p class="card-text mb-4">{{viaje.descripcion}}</p>
+              <p class="card-text mb-4">Lugares disponibles: {{viaje.disponible}}</p>
               <div class="d-flex justify-content-end">
                 <button type="button" class="btn btn-primary text-center px-5 rounded-pill" data-bs-toggle="modal" data-bs-target="#exampleModal{{viaje.id}}">Ver más</button>
               </div>
@@ -51,6 +52,8 @@
                     <li>Fecha: {{viaje.datetime}}</li>
                       <br>
                     <li>Imagen: <img src="{{viaje.imagen_vehiculo.url}}" alt="Auto" width="90%"></li>
+                      <br>
+                    <li>Lugares disponibles: {{viaje.disponible}}</li>                  
                 </ul>
             </div>
             <div class="modal-footer">
@@ -61,7 +64,7 @@
                 {% csrf_token %}
                 <input type="hidden" name="user" value="0" />
                 <input type="hidden" name="viaje" value="{{viaje.id}}"/>
-                <input type="submit" name="solicitar_unirse" id="solicitud{{viaje.id}}">
+                <input class="btn btn-success" value="Solicitar Unirme" type="submit" name="solicitar_unirse">
               </form>
 
               <!-- <button id="{{viaje.id}}" class="btn bg-success text-white my-3 boton-solicitar-unirse" type="button">Solicitar Unirme</button> -->

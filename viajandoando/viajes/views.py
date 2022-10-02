@@ -61,9 +61,13 @@ def crear_viaje(request):
 
 @login_required
 def mis_viajes(request):
+	viajes_creados = ''
 	if request.method == "GET":
-		conductor = Conductor.objects.get(user_id=request.user.id)
-		viajes_creados = Viaje.objects.filter(conductor_id=conductor)
+		try:
+			conductor = Conductor.objects.get(user_id=request.user.id)
+			viajes_creados = Viaje.objects.filter(conductor_id=conductor)
+		except:
+			print('No es conductor.')
 		viajes_solicitados = UsuarioPeticion.objects.filter(user_id=request.user)
 	return render(request, "viajes/mis_viajes.html", {'viajes_solicitados': viajes_solicitados, 'viajes_creados': viajes_creados})
 

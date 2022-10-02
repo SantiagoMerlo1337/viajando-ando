@@ -43,10 +43,9 @@ def activateEmail(request, user, to_email):
     })
     email = EmailMessage(mail_subject, message, to=[to_email])
     if email.send():
-        messages.success(request, f'Estimado <b>{user}</b>, ingresa en tu mail <b>{to_email}</b> y verifica la bandeja de entrada el mail de confirmacion para confirmar la registracion de su cuenta. \
-		<b>Nota:</b> Revisa en la seccion de spam')
+        messages.success(request, f'Estimado {user}, ingresa en tu mail {to_email} y verifica la bandeja de entrada el mail de confirmacion para confirmar la registracion de su cuenta. Nota: Revisa en la seccion de spam')
     else:
-        messages.error(request, f'Hubo un problema enviando el mail a <b>{to_email}</b>, revisa si lo has escrito correctamente.')
+        messages.error(request, f'Hubo un problema enviando el mail a {to_email}, revisa si lo has escrito correctamente.')
 
 @user_not_authenticated
 def register_request(request):

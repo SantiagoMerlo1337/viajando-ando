@@ -142,4 +142,7 @@ EMAIL_USE_TLS = True
 
 PASSWORD_RESET_TIMEOUT = 14400
 
+if not os.environ.get('RUNNING_INSIDE_HEROKU', False):
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 django_heroku.settings(locals())

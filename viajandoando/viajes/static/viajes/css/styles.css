@@ -24,7 +24,8 @@ hr{
     opacity: 0.1;
 }
 .shadowCustom{
-    text-shadow: 0 0 18px black;
+    /* text-shadow: 0 0 22px rgb(0, 0, 0); */
+    text-shadow: 0 0 15px rgb(0, 0, 0);
 }
 .colorPrim{
     color: #0e6da3;
@@ -41,4 +42,17 @@ hr{
 }
 .btn-form{
     display: inline;
+}
+.botonViajes{
+    text-decoration: none;
+    background-color: white;
+    font-weight: 600;
+}
+.cartelViajes{
+    /* background-color: #0e6da3; */
+    background-color: #33798f;
+    color: white;
+}
+.portadaInicio{
+    min-height: 300px;
 }

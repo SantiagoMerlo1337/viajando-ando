@@ -1,5 +1,5 @@
 from django import forms
-from viajes.models import UsuarioPeticion, Viaje
+from viajes.models import  Viaje
 
 #WIDGETS
 

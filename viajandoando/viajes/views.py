@@ -26,19 +26,22 @@ def viajes(request):
 			destino = form.cleaned_data['ciudad_destino']
 			viajes = Viaje.objects.filter(datetime__range=[date1, date2], ciudad_origen=origen, ciudad_destino=destino)
 	else:
-		form = CrearUsuarioPeticionFormulario(request.POST, request.FILES)
-		if form.is_valid():
-			cd = form.cleaned_data
-			viaje = Viaje.objects.get(pk=cd['viaje'])
-			pc = UsuarioPeticion(
-                viaje = viaje,
-                user = request.user
-            )
-			if UsuarioPeticion.objects.filter(user=request.user, viaje=viaje).count() == 0 and viaje.conductor.user != request.user:
-				pc.save()
-			else:
-				messages.error(request, 'Error en la solicitud')
-			return HttpResponseRedirect("/viajes")
+		if request.user.is_authenticated:
+			form = CrearUsuarioPeticionFormulario(request.POST, request.FILES)
+			if form.is_valid():
+				cd = form.cleaned_data
+				viaje = Viaje.objects.get(pk=cd['viaje'])
+				pc = UsuarioPeticion(
+					viaje = viaje,
+					user = request.user
+				)
+				if UsuarioPeticion.objects.filter(user=request.user, viaje=viaje).count() == 0 and viaje.conductor.user != request.user:
+					pc.save()
+				else:
+					messages.error(request, 'Error en la solicitud')
+				return HttpResponseRedirect("/viajes")
+		else:
+			return HttpResponseRedirect("/viajes", messages.error(request, f'Debe iniciar sesión para solicitar unirse a un viaje'))
 	return render(request, "viajes/viajes.html", {"form": form, 'lista_viajes': viajes, 'origen':origen, 'destino': destino})
 
 @login_required
@@ -54,7 +57,7 @@ def crear_viaje(request):
 		viaje.conductor = conductor
 		viaje.disponible = viaje.capacidad
 		form.save()
-		return HttpResponseRedirect("/viajes/")
+		return HttpResponseRedirect("/viajes", messages.error(request, f'El viaje ha sido creado con éxito.'))
 	else:
 		form = CrearViajeFormulario()
 	return render(request, "viajes/crear.html", {"form": form})
@@ -74,23 +77,24 @@ def mis_viajes(request):
 @login_required
 def mis_viajes_detalle(request, id):
 	viaje = Viaje.objects.get(id=id)
+	print(id)
 	if request.user == viaje.conductor.user:
 		lista_usuario_peticion = UsuarioPeticion.objects.filter(viaje_id=id)
 		if request.method == "POST":
 			id_peticion = request.POST["esta_aceptado"]
 			peticion = UsuarioPeticion.objects.get(pk=id_peticion)
-			if 'aceptar' in request.POST:		
-				if peticion.viaje.disponible > 0 and peticion.esta_aceptado == False:
-					peticion.esta_aceptado = True
+			if 'aceptar' in request.POST:
+				if peticion.viaje.disponible > 0 and (peticion.esta_aceptado == None or peticion.esta_aceptado == False):
 					peticion.viaje.disponible = peticion.viaje.disponible - 1
-					peticion.viaje.save()
-					peticion.save()
+				peticion.esta_aceptado = True
+				peticion.viaje.save()
+				peticion.save()
 			else:
 				if peticion.esta_aceptado == True:
-					peticion.esta_aceptado = False
 					peticion.viaje.disponible = peticion.viaje.disponible + 1
-					peticion.viaje.save()
-					peticion.save()
+				peticion.esta_aceptado = False
+				peticion.viaje.save()
+				peticion.save()
 			return HttpResponseRedirect("/viajes/misviajes")
 	return render(request, "viajes/mis_viajes_detalle.html", {'viaje': viaje, 'lista_usuario_peticion': lista_usuario_peticion})
 

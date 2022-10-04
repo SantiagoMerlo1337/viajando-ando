@@ -37,6 +37,7 @@ def viajes(request):
 				)
 				if UsuarioPeticion.objects.filter(user=request.user, viaje=viaje).count() == 0 and viaje.conductor.user != request.user:
 					pc.save()
+					return HttpResponseRedirect("/viajes", messages.error(request, f'Se envió tu solicitud con éxito al viaje de {viaje.conductor.user.username}.'))
 				else:
 					messages.error(request, 'Error en la solicitud')
 				return HttpResponseRedirect("/viajes")
@@ -98,7 +99,8 @@ def mis_viajes_detalle(request, id):
 			return HttpResponseRedirect("/viajes/misviajes")
 	return render(request, "viajes/mis_viajes_detalle.html", {'viaje': viaje, 'lista_usuario_peticion': lista_usuario_peticion})
 
-	
+
+
 # API
 def obtener_viaje(request, id):
 	viaje = Viaje.objects.get(id=id)

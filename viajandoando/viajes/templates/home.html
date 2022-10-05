@@ -2,19 +2,20 @@
 
 {% block content_info %}
 <div class="container-fluid px-0">
-    <div class="imagenInicio">
-        <div class="container py-5 text-center text-md-start text-white portadaInicio">
-            <h3 class="fs-1 tituloInicio shadowCustom">ENCONTRÁ FACILMENTE A TUS COMPAÑEROS DE VIAJES</h3>
-            <h4 class="subtituloInicio fs-3 shadowCustom">Dividí, ahorrá y ganá 😉</h4>
+    <div class="imagenInicio portadaInicio">
+        <div class="container pt-5 text-center text-md-start text-white">
+            <h3 class="fs-1 tituloInicio d-inline">ENCONTRÁ FACILMENTE A TUS COMPAÑEROS DE VIAJES</h3>
+            <br>
+            <h4 class="subtituloInicio fs-3 d-inline">Dividí, ahorrá y ganá 😉</h4>
+            
+        </div>
+        <div class="text-center">
+            <a href="{% url 'viajes' %}"><button class="btn botonViajes fs-3 rounded-pill my-5">¡Busca tu viaje ahora! 🚗</button></a>       
         </div>
     </div>
-    <div class="py-3 bg-gradient text-center cartelViajes shadow-lg">
-        <p class="fs-2">¡Busca tu viaje ahora!</p>
-        <a href="{% url 'viajes' %}"><button class="btn botonViajes text-success fs-5 rounded-pill">Has click aquí</button></a>
-    </div>
 
-    <h4 class="fs-2 text-center py-5 ">¿Qué es ViajandoAndo? 🗺️📌</h4>
     <div class="container">
+        <h4 class="fs-2 text-center py-5 ">🗺️ ¿Qué es ViajandoAndo? 📌</h4>
         <p class="fs-5 m-3 text-center">Es un sitio web que te permite conectar con gente que esté dispuesta a viajar de un origen a un destino específico.</p>
     </div>
 </div>

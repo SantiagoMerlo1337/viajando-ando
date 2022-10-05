@@ -5,23 +5,26 @@
 
 {% block content_viaje %}
 <div class="container py-4 vh-100">
-  <h3 class="h3 pb-3 colorPrim">¡Busca tu viaje!</h3>
-  <form action="." method="get">
-    <div class="d-flex flex-column flex-md-row justify-content-lg-start text-center gap-4">
-      <!-- {{ form|crispy }} -->
-      {% for item in form %}
-            <div class="fieldWrapper">
-                {{ item.label }} {{ item }}
-                {% if item.help_text %}
-                    {{ item.help_text|safe }}
-                {% endif %}
-            </div>
-            <br>
-      {% endfor %}
-    </div>
-    <input class="btn bg-primary text-white me-3 my-3" type="submit" value="Buscar" />
-  </form>
-  <a href="{% url 'crear viaje' %}"><button class="btn bg-success text-white">Crear viaje</button></a>
+  <div class="container-fluid">
+    <h3 class="h3 pb-3 colorPrim">¡Busca tu viaje!</h3>
+    <form action="." method="get">
+      <div class="d-flex flex-column flex-md-row justify-content-lg-start text-center gap-4">
+        <!-- {{ form|crispy }} -->
+        {% for item in form %}
+              <div class="fieldWrapper text-nowrap">
+                  {{ item.label }} {{ item }}
+                  {% if item.help_text %}
+                      {{ item.help_text|safe }}
+                  {% endif %}
+              </div>
+              <br>
+        {% endfor %}
+      </div>
+      <input class="btn bg-primary text-white me-3 my-3" type="submit" value="Buscar" />
+    </form>
+    <a href="{% url 'crear viaje' %}"><button class="btn bg-success text-white">Crear viaje</button></a>
+  </div>
+  
 
   <div class="viajes mt-3">
   {% if lista_viajes|length == 0 %}

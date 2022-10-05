@@ -64,3 +64,6 @@ def register_request(request):
 	else:
 		form = NewUserForm()
 	return render (request=request, template_name="register.html", context={"register_form":form})
+
+def perfil_request(request, id):
+    return render (request, "perfil.html")

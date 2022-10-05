@@ -40,7 +40,7 @@
                             👤{{user.username}}
                           </a>
                           <ul class="dropdown-menu dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Ver mi perfil</a></li>
+                            <li><a class="dropdown-item" href="{% url 'perfil' user.id %}">Ver mi perfil</a></li>
                             <li><a class="dropdown-item" href="{% url 'mis viajes' %}">Mis viajes</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="{% url 'logout' %}">Cerrar sesion</a></li>

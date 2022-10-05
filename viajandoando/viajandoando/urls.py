@@ -35,6 +35,7 @@ urlpatterns = [
     path("viajes/misviajes", viajes_views.mis_viajes, name="mis viajes"),
     path("viajes/misviajes/<int:id>", viajes_views.mis_viajes_detalle, name="mis_viajes_detalle"),
     path("viajes/crear/", viajes_views.crear_viaje, name="crear viaje"),
+    path("accounts/user/<int:id>", user_views.perfil_request, name="perfil"),
     path('api/viajes/<int:id>', viajes_views.obtener_viaje, name="obtener viaje"),
     path('api/viajes', viajes_views.obtener_viajes, name="obtener viajes")
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

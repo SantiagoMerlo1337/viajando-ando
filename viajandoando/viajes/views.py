@@ -90,13 +90,14 @@ def mis_viajes_detalle(request, id):
 				peticion.esta_aceptado = True
 				peticion.viaje.save()
 				peticion.save()
+				return HttpResponseRedirect(f"/viajes/misviajes/{id}", messages.error(request, f'Se ha aceptado al usuario: {peticion.user.username}'))
 			else:
 				if peticion.esta_aceptado == True:
 					peticion.viaje.disponible = peticion.viaje.disponible + 1
 				peticion.esta_aceptado = False
 				peticion.viaje.save()
 				peticion.save()
-			return HttpResponseRedirect("/viajes/misviajes")
+				return HttpResponseRedirect(f"/viajes/misviajes/{id}", messages.error(request, f'Se ha rechazado al usuario: {peticion.user.username}'))
 	return render(request, "viajes/mis_viajes_detalle.html", {'viaje': viaje, 'lista_usuario_peticion': lista_usuario_peticion})
 
 

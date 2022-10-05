@@ -26,19 +26,38 @@
                       Rechazado ❌
                   {% endif %}
           </p>
-          <!-- ACEPTAR -->
           <div class="d-flex justify-content-end">
-            <form method="POST" action="" class="d-inline m-0 justify-content-end">
-              {% csrf_token %}
-              <input type="hidden" name="esta_aceptado" value="{{usuario.id}}"/>
-              <input class="btn btn-success" value="Aceptar" type="submit" name="aceptar">
-            </form>
-            <!-- RECHAZAR -->
-            <form method="POST" action="" class="d-inline ps-2 m-0 justify-content-end">
-              {% csrf_token %}
-              <input type="hidden" name="esta_aceptado" value="{{usuario.id}}"/>
-              <input class="btn btn-danger" value="Rechazar" type="submit" name="rechazar">
-            </form>          
+            {% if usuario.esta_aceptado == None %}
+              <!-- ACEPTAR -->
+              <form method="POST" action="" class="d-inline m-0 justify-content-end">
+                {% csrf_token %}
+                <input type="hidden" name="esta_aceptado" value="{{usuario.id}}"/>
+                <input class="btn btn-success" value="Aceptar" type="submit" name="aceptar">
+              </form>
+              <!-- RECHAZAR -->
+              <form method="POST" action="" class="d-inline ps-2 m-0 justify-content-end">
+                {% csrf_token %}
+                <input type="hidden" name="esta_aceptado" value="{{usuario.id}}"/>
+                <input class="btn btn-danger" value="Rechazar" type="submit" name="rechazar">
+              </form>
+              {% elif usuario.esta_aceptado == True %}
+                <!-- RECHAZAR -->
+                <form method="POST" action="" class="d-inline ps-2 m-0 justify-content-end">
+                  {% csrf_token %}
+                  <input type="hidden" name="esta_aceptado" value="{{usuario.id}}"/>
+                  <input class="btn btn-danger" value="Rechazar" type="submit" name="rechazar">
+                </form> 
+              {% else %}
+                <!-- ACEPTAR -->
+                <form method="POST" action="" class="d-inline m-0 justify-content-end">
+                  {% csrf_token %}
+                  <input type="hidden" name="esta_aceptado" value="{{usuario.id}}"/>
+                  <input class="btn btn-success" value="Aceptar" type="submit" name="aceptar">
+                </form>
+            {% endif %}
+
+            
+                     
           </div>
         </div>
     </div>

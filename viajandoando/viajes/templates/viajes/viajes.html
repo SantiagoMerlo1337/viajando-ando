@@ -4,8 +4,8 @@
 {% load static %}
 
 {% block content_viaje %}
-<div class="container py-4 vh-100">
-  <div class="container-fluid">
+<div class="fondoImagen py-5">
+  <div class="container card py-3">
     <h3 class="h3 pb-3 colorPrim">¡Busca tu viaje!</h3>
     <form action="." method="get">
       <div class="d-flex flex-column flex-md-row justify-content-lg-start text-center gap-4">
@@ -24,6 +24,9 @@
     </form>
     <a href="{% url 'crear viaje' %}"><button class="btn bg-success text-white">Crear viaje</button></a>
   </div>
+</div>
+
+<div class="container py-4 vh-100">
   
 
   <div class="viajes mt-3">

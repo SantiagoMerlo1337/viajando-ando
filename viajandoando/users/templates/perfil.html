@@ -4,5 +4,23 @@
 
 {% block content_viaje %}
     
+<div class="container w-100">
+    <div class="card w-100 d-flex">
+        {% if conductor != None %}
+            <img src="/media/{{conductor.foto_perfil}}" style="width: 10%;" alt="Foto perfil">
+        {% endif %}
+        <div class="card-body">
+          <h5 class="card-title">{{usuario.username}}</h5>
+          <p class="card-text">ID: {{usuario.id}}</p>
+          <p class="card-text">Cantidad de viajes creados: {{usuario_viajes}}</p>
+          {% if conductor == None %}
+            <p class="card-text">Es pasajero</p>
+            {% else %} 
+            <p class="card-text">Es conductor - Licencia {{conductor.licencia}}</p>
+          {% endif %}
+        </div>
+    </div>
+</div>
 
+    
 {% endblock %}

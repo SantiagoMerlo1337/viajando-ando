@@ -14,11 +14,11 @@ body{
 .tituloInicio{
     font-weight: 700;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.6);
 }
 .subtituloInicio{
     font-weight: 500;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.6);
 }
 main{
     background-color: aliceblue;
@@ -67,5 +67,5 @@ hr{
     color: white;
 }
 .portadaInicio{
-    min-height: 300px;
+    min-height: 65vh;
 }

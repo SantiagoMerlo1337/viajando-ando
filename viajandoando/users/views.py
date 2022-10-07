@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.shortcuts import  render, redirect
 from django.contrib import messages
 from django.contrib.auth import get_user_model
+
+from viajes.views import viajes
 from .tokens import account_activation_token
 from django.template.loader import render_to_string
 from django.contrib.sites.shortcuts import get_current_site
@@ -66,4 +68,14 @@ def register_request(request):
 	return render (request=request, template_name="register.html", context={"register_form":form})
 
 def perfil_request(request, id):
-    return render (request, "perfil.html")
+    if request.method == "GET":
+        usuario = User.objects.get(pk=id)
+        usuario_viajes = Viaje.objects.filter(conductor=usuario.id).count()
+        try:
+            conductor = Conductor.objects.get(user_id=usuario.id)
+            return render (request, "perfil.html", {"usuario": usuario, "usuario_viajes": usuario_viajes, "conductor": conductor})
+        except:
+            print('error')
+            return render (request, "perfil.html", {"usuario": usuario, "usuario_viajes": usuario_viajes})
+        
+        

@@ -30,6 +30,10 @@
                     <li class="nav-item">
                       <a class="nav-link px-3 fw-bold itemNav rounded-pill" href="{% url 'viajes' %}">Viajes</a>
                     </li>
+                    <form class="d-flex" role="search">
+                      <input class="form-control me-2" type="search" placeholder="Ciudades, usuarios, etc." aria-label="Search">
+                      <button class="btn" type="submit">🔍</button>
+                    </form>
                 </ul>
                 <div class="d-flex align-items-center justify-content-between gap-4">
                   {% if user.is_authenticated %}

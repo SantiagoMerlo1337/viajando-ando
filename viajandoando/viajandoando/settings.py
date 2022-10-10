@@ -140,8 +140,6 @@ EMAIL_HOST_PASSWORD = os.getenv('DJANGO_EMAIL_HOST_PASSWORD','')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-'kxepoqtaakvqozhg'
-
 PASSWORD_RESET_TIMEOUT = 14400
 
 if not os.environ.get('RUNNING_INSIDE_HEROKU', False):

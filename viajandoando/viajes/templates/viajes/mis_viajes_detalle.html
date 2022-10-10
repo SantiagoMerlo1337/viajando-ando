@@ -16,7 +16,7 @@
     {% for usuario in lista_usuario_peticion %}
     <div class="card w-50 my-4">
         <div class="card-body">
-          <h5 class="card-title">{{usuario.user.username}}</h5>
+          <h5 class="card-title"><a class="text-decoration-none" href="{% url 'perfil' usuario.user.id %}">{{usuario.user.username}}</a></h5>
           <p class="card-text d-inline">Estado: 
                   {% if usuario.esta_aceptado == None %}
                     Pendiente ⏲

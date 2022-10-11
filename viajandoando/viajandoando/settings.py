@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'viajes',
     'users',
+    'haystack',
     'crispy_forms',
     'django_extensions',
 ]
@@ -144,5 +145,21 @@ PASSWORD_RESET_TIMEOUT = 14400
 
 if not os.environ.get('RUNNING_INSIDE_HEROKU', False):
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+if os.environ.get('SEARCHBOX_URL'):
+    HAYSTACK_CONNECTIONS = {
+        'default': {
+            'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+            'URL': os.environ.get('SEARCHBOX_URL'),
+            'INDEX_NAME': 'documents',
+        },
+    }
+else:
+    HAYSTACK_CONNECTIONS = {
+        'default': {
+            'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+            'PATH': BASE_DIR / 'whoosh_index',
+        },
+    }
 
 django_heroku.settings(locals())

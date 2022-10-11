@@ -5,3 +5,7 @@ django-crispy-forms
 django-extensions
 Pillow
 six
+django-haystack
+whoosh
+elasticsearch<7.14.0
+certifi

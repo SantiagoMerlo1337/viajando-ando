@@ -20,14 +20,13 @@
               <br>
         {% endfor %}
       </div>
-      <input class="btn bg-primary text-white me-3 my-3" type="submit" value="Buscar" />
+      <input class="btn bg-primary text-white me-3 my-3 width-button" type="submit" value="Buscar" />
     </form>
-    <a href="{% url 'crear viaje' %}"><button class="btn bg-success text-white">Crear viaje</button></a>
+    <a class="btn bg-success text-white width-button" href="{% url 'crear viaje' %}">Crear viaje</a>
   </div>
 </div>
 
 <div class="container py-4 vh-100">
-  
 
   <div class="viajes mt-3">
   {% if lista_viajes|length == 0 %}

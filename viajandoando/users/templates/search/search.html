@@ -1,37 +1,39 @@
 {% extends 'base.html' %}
 
 {% block content_info %}
-<div class="container">
-    <h2>Buscar:</h2>
-
-    <form method="get" action=".">
-        <table>
-            {{ form.as_table }}
-            <tr>
-                <td>&nbsp;</td>
-                <td>
-                    <input type="submit" value="Buscar">
-                </td>
-            </tr>
-        </table>
-
-        {% if query %}
-            <h3>Resultados:</h3>
-
-            {% for result in page.object_list %}
-                <p>{{ result.nombre }}, {{ result.id }}</p>
-            {% empty %}
-                <p>No se encontraron usuarios.</p>
-            {% endfor %}
-
-            {% if page.has_previous or page.has_next %}
-                <div>
-                    {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
-                    |
-                    {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
-                </div>
-            {% endif %}
-        {% endif %}
-    </form>
+<div class="fondoImagen py-5">
+    <div class="container card py-3">
+        <h3 class="h3 pb-3 colorPrim">Busqueda de usuario: </h3>
+        <form method="get" action=".">
+            <div class="d-flex flex-column flex-md-row justify-content-lg-start text-center gap-4">
+                <table>
+                    {{ form.as_table }}
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>
+                            <input class="btn bg-primary text-white me-3 my-3" type="submit" value="Buscar">
+                        </td>
+                    </tr>
+                </table>
+        
+                {% if query %}
+        
+                    {% for result in page.object_list %}
+                        <a class="text-decoration-none fs-4" href="{% url 'perfil' result.id %}">{{result.nombre}}</a>
+                    {% empty %}
+                        <p>No se encontraron usuarios.</p>
+                    {% endfor %}
+        
+                    {% if page.has_previous or page.has_next %}
+                        <div>
+                            {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
+                            |
+                            {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
+                        </div>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </form>
+    </div>
 </div>
 {% endblock %}

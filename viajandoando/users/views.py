@@ -2,8 +2,6 @@ from django.shortcuts import render
 from django.shortcuts import  render, redirect
 from django.contrib import messages
 from django.contrib.auth import get_user_model
-
-from viajes.views import viajes
 from .tokens import account_activation_token
 from django.template.loader import render_to_string
 from django.contrib.sites.shortcuts import get_current_site
@@ -14,6 +12,8 @@ from .decorators import user_not_authenticated
 from viajes.models import *
 from users.models import *
 from .forms import *
+from django.http import HttpResponse
+from django.views.decorators.http import require_GET
 
 def activate(request, uidb64, token):
     User = get_user_model()
@@ -78,4 +78,10 @@ def perfil_request(request, id):
             print('error')
             return render (request, "perfil.html", {"usuario": usuario, "usuario_viajes": usuario_viajes})
         
-        
+@require_GET
+def robots_txt(request):
+    lines = [
+        "User-Agent: *",
+        "Disallow: /admin/",
+    ]
+    return HttpResponse("\n".join(lines), content_type="text/plain")

@@ -39,4 +39,5 @@ urlpatterns = [
     path('api/viajes/<int:id>', viajes_views.obtener_viaje, name="obtener viaje"),
     path('api/viajes', viajes_views.obtener_viajes, name="obtener viajes"),
     path('search/', include('haystack.urls'), name="search"),
+    path("robots.txt", user_views.robots_txt),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

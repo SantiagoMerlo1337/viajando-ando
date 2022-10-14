@@ -14,17 +14,24 @@ def inicio(request):
 def viajes(request):
 	form = ''
 	viajes = ''
+	viajes_ya_solicitados = ''
 	origen = ''
 	destino = ''
 	if request.method == "GET":
 		form = BuscarViajesFormulario(request.GET)
-		if form.is_valid() and form.cleaned_data['fecha_inicio'] < form.cleaned_data['fecha_fin'] and form.cleaned_data['ciudad_origen'] != form.cleaned_data['ciudad_destino']:\
-			
+		if form.is_valid() and form.cleaned_data['fecha_inicio'] < form.cleaned_data['fecha_fin'] and form.cleaned_data['ciudad_origen'] != form.cleaned_data['ciudad_destino']:
 			date1 = form.cleaned_data['fecha_inicio']
 			date2 = form.cleaned_data['fecha_fin']
 			origen = form.cleaned_data['ciudad_origen']
 			destino = form.cleaned_data['ciudad_destino']
-			viajes = Viaje.objects.filter(datetime__range=[date1, date2], ciudad_origen=origen, ciudad_destino=destino)
+			viajes_ya_solicitados = UsuarioPeticion.objects.filter(user_id=request.user.id)
+			if viajes_ya_solicitados.count()== 0:
+				viajes = Viaje.objects.filter(datetime__range=[date1, date2], ciudad_origen=origen, ciudad_destino=destino)
+			else:
+				aux=[]
+				for viaje_peticion in viajes_ya_solicitados:
+					aux.append(viaje_peticion.viaje.id)
+				viajes = Viaje.objects.filter(datetime__range=[date1, date2], ciudad_origen=origen, ciudad_destino=destino).exclude(id__in=aux)
 	else:
 		if request.user.is_authenticated:
 			form = CrearUsuarioPeticionFormulario(request.POST, request.FILES)

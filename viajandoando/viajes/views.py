@@ -7,10 +7,6 @@ from datetime import date, datetime
 from django.http import JsonResponse
 from django.contrib import messages
 
-def inicio(request):
-
-    return render(request, 'base.html', {})
-
 def viajes(request):
 	form = ''
 	viajes = ''

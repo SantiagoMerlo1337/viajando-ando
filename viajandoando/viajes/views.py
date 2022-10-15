@@ -1,11 +1,13 @@
+from django.core.mail import send_mail
+from django.conf import settings
 from django.shortcuts import render, HttpResponseRedirect
-from viajes.models import *
-from users.models import *
-from .forms import *
 from django.contrib.auth.decorators import login_required
 from datetime import date, datetime
 from django.http import JsonResponse
 from django.contrib import messages
+from viajes.models import *
+from users.models import *
+from .forms import *
 
 def viajes(request):
 	form = ''
@@ -81,7 +83,6 @@ def mis_viajes(request):
 @login_required
 def mis_viajes_detalle(request, id):
 	viaje = Viaje.objects.get(id=id)
-	print(id)
 	if request.user == viaje.conductor.user:
 		lista_usuario_peticion = UsuarioPeticion.objects.filter(viaje_id=id)
 		if request.method == "POST":
@@ -93,6 +94,15 @@ def mis_viajes_detalle(request, id):
 				peticion.esta_aceptado = True
 				peticion.viaje.save()
 				peticion.save()
+				
+				# Notificación por mail
+				send_mail(
+					'Buenas noticias! 👍',
+					f'{peticion.viaje.conductor} ha aceptado tu solicitud de viaje hacia {peticion.viaje.ciudad_destino} 😄.\nSi todavía no contactaste con el conductor para organizar el viaje hazlo lo antes posible!\nContacto del conductor: https://wa.me/+54{peticion.viaje.conductor.celular} 📲',
+					settings.EMAIL_FROM,
+					[peticion.user.email],
+					fail_silently=False,
+				)
 				return HttpResponseRedirect(f"/viajes/misviajes/{id}", messages.error(request, f'Se ha aceptado al usuario: {peticion.user.username}'))
 			else:
 				if peticion.esta_aceptado == True:
@@ -100,6 +110,13 @@ def mis_viajes_detalle(request, id):
 				peticion.esta_aceptado = False
 				peticion.viaje.save()
 				peticion.save()
+				send_mail(
+					'Malas noticias...',
+					f'{peticion.viaje.conductor} ha rechazado tu solicitud de viaje hacia {peticion.viaje.ciudad_destino} 😢.\nNo bajes los brazos! sigue buscando viajes que se adecuen a tus necesidades 😊',
+					settings.EMAIL_FROM,
+					[peticion.user.email],
+					fail_silently=False,
+				)
 				return HttpResponseRedirect(f"/viajes/misviajes/{id}", messages.error(request, f'Se ha rechazado al usuario: {peticion.user.username}'))
 	return render(request, "viajes/mis_viajes_detalle.html", {'viaje': viaje, 'lista_usuario_peticion': lista_usuario_peticion})
 

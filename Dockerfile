@@ -19,6 +19,6 @@ RUN mkdir -p /app_grupo7/data
 
 RUN python viajandoando/manage.py migrate
 
-RUN python viajandoando/manage.py update_index --remove
+RUN python viajandoando/manage.py rebuild_index --noinput
 
 CMD ["python","viajandoando/manage.py","runserver", "0.0.0.0:8000"]

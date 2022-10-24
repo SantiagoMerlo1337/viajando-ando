@@ -11,8 +11,8 @@ class TimePickerInput(forms.TimeInput):
 #FORMS
 
 class BuscarViajesFormulario(forms.ModelForm):
-	fecha_inicio = forms.DateTimeField(widget=DatePickerInput(attrs={'type': 'date'}))
-	fecha_fin = forms.DateTimeField(widget=DatePickerInput(attrs={'type': 'date'}))
+	fecha_inicio = forms.DateField(widget=DatePickerInput(attrs={'type': 'date'}))
+	fecha_fin = forms.DateField(widget=DatePickerInput(attrs={'type': 'date'}))
 	class Meta:
 		model = Viaje
 		fields = ['ciudad_origen','ciudad_destino',]

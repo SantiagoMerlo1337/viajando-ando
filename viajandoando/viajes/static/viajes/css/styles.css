@@ -70,11 +70,23 @@ hr{
     min-height: 65vh;
 }
 .fondoImagen{
-    background-image: url(https://images.unsplash.com/photo-1560336811-fe9526e287fe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1934&q=80);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
 }
+.fondoImagen1{
+    background-image: url(https://images.unsplash.com/photo-1560336811-fe9526e287fe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1934&q=80);
+}
+.fondoImagen2{
+    background-image: url(https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1035&q=80);
+}
 .width-button{
     width: 120px;
+}
+.list-type{
+    list-style-type: none;
+}
+.navbar-toggler-icon{
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    filter: invert(1);
 }

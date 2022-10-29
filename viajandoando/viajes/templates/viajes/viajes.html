@@ -4,7 +4,7 @@
 {% load static %}
 
 {% block content_viaje %}
-<div class="fondoImagen1 py-5">
+<div class="fondoImagen fondoImagen1 py-5">
   <div class="container card py-3">
     <h3 class="h3 pb-3 colorPrim">¡Busca tu viaje!</h3>
     <form action="." method="get">
@@ -44,7 +44,7 @@
             </div>
             <hr>
               <p class="card-text mb-4">{{viaje.descripcion}}</p>
-              <p class="card-text mb-4">Lugares disponibles: {{viaje.disponible}}</p>
+              <p class="card-text mb-2">Lugares disponibles: {{viaje.disponible}}</p>
               <div class="d-flex justify-content-end">
                 <button type="button" class="btn btn-primary text-center px-5 rounded-pill" data-bs-toggle="modal" data-bs-target="#exampleModal{{viaje.id}}">Ver más</button>
               </div>
@@ -60,14 +60,19 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <ul>
-                    <li>Descripcion: {{viaje.descripcion}}</li>
-                      <br>
-                    <li>Fecha: {{viaje.datetime}}</li>
-                      <br>
-                    <li>Imagen: <img src="{{viaje.imagen_vehiculo.url}}" alt="Auto" width="90%"></li>
-                      <br>
-                    <li>Lugares disponibles: {{viaje.disponible}}</li>                  
+              <div class="d-flex d-flex justify-content-center mb-3">
+                <img src="{{viaje.conductor.foto_perfil.url}}" class="rounded" alt="FotoPerfil">
+              </div>
+              <ul>
+                  <li>Descripción: <p>{{viaje.descripcion}}</p></li>
+                    <br>
+                  <li>Fecha: <p>{{viaje.fecha}}</p></li>
+                    <br>
+                  <li>Hora: <p>{{viaje.hora}}</p></li>
+                    <br>
+                  <li>Vehículo: <img src="{{viaje.imagen_vehiculo.url}}" alt="Auto" width="90%"></li>
+                    <br>
+                  <li>Lugares disponibles: <p>{{viaje.disponible}}</p></li>
                 </ul>
             </div>
             <div class="modal-footer">

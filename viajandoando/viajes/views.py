@@ -43,7 +43,7 @@ def viajes(request):
 				)
 				if UsuarioPeticion.objects.filter(user=request.user, viaje=viaje).count() == 0 and viaje.conductor.user != request.user:
 					pc.save()
-					return HttpResponseRedirect("/viajes", messages.error(request, f'Se envió tu solicitud con éxito al viaje de {viaje.conductor.user.username}.'))
+					return HttpResponseRedirect("/viajes/misviajes", messages.error(request, f'Se envió tu solicitud con éxito al viaje de {viaje.conductor.user.username}.'))
 				else:
 					messages.error(request, 'Error en la solicitud')
 				return HttpResponseRedirect("/viajes")

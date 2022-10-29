@@ -11,6 +11,9 @@ body{
     background-position: center;
     /* height: 15rem; */
 }
+.portadaInicio{
+    min-height: 65vh;
+}
 .tituloInicio{
     font-weight: 700;
     width: 100%;
@@ -39,6 +42,10 @@ hr{
 .itemNav{
     color: #0e6da3;
 }
+.itemNav:hover{
+    background-color: #0e6ca31a;
+    transition: all 0.2s;
+}
 .cardViaje{
     width: 600px;
     min-width: 300px;
@@ -66,9 +73,6 @@ hr{
     background-color: #33798f;
     color: white;
 }
-.portadaInicio{
-    min-height: 65vh;
-}
 .fondoImagen{
     background-repeat: no-repeat;
     background-size: cover;
@@ -79,6 +83,9 @@ hr{
 }
 .fondoImagen2{
     background-image: url(https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1035&q=80);
+}
+.perfilFondo{
+    min-height: 94vh;
 }
 .width-button{
     width: 120px;
@@ -93,12 +100,23 @@ hr{
 .bordePerfil{
     border-radius: 30px;
 }
-.a{
+.width-75-50{
     width: 50%;
+}
+.card{
+    background-color: rgba(255, 255, 255, 0.8);
+}
+.modal-body ul li{
+    display: inline-block;
+    text-decoration: underline;
+}
+.modal-body ul li p{
+    display: inline-block;
+    text-decoration: none;
 }
 
 @media (max-width: 580px) {
-    .a{
+    .width-75-50{
       width: 75%;
     }
   }

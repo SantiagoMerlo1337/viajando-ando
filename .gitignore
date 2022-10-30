@@ -1,9 +1,7 @@
 /venv
-<<<<<<< Updated upstream
 db.sqlite
 /viajandoando/viajandoando/__pycache__
 __pycache__/
-=======
 /viajandoando/viajandoando/__pycache__
 __pycache__
 db.sqlite3
@@ -11,4 +9,3 @@ media
 data
 .vscode
 whoosh_index
->>>>>>> Stashed changes

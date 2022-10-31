@@ -7,7 +7,11 @@ ENV PYTHONUNBUFFERED=1
 
 RUN mkdir /app_grupo7
 
+ENV DOCKER_ENV = True
+
 WORKDIR /app_grupo7
+
+RUN mkdir /data
 
 COPY requirements.txt /app_grupo7/
 

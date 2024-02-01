@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 import Navbar from "../components/navbar/Navbar";
 
@@ -16,12 +17,15 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="es">
-            <body className={inter.className}>
-                <Navbar></Navbar>
-
-                <div className="container mx-auto bg-slate-100">{children}</div>
-            </body>
-        </html>
+        <ClerkProvider>
+            <html lang="es">
+                <body className={inter.className}>
+                    <Navbar></Navbar>
+                    <div className="container mx-auto bg-slate-100">
+                        {children}
+                    </div>
+                </body>
+            </html>
+        </ClerkProvider>
     );
 }
